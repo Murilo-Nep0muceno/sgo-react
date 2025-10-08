@@ -1,15 +1,19 @@
+// src/index.js
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext'; // Importe o AuthProvider
 import App from './App';
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>      {/* 1. O Router vem primeiro, por fora de tudo */}
+      <AuthProvider> {/* 2. O AuthProvider vem depois, por dentro */}
+        <App />      {/* 3. O App fica por último */}
+      </AuthProvider>
+    </Router>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
