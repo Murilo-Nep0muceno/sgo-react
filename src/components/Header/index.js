@@ -9,17 +9,18 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <Link to="/" className={styles.logo}>Sistema Odonto</Link>
-            <nav>
-                {user ? (
-                    <>
-                        {user.role === 'admin' && <Link to="/admin-dashboard" className={styles.navLink}>Painel Admin</Link>}
-                        {user.role === 'secretary' && <Link to="/secretary-dashboard" className={styles.navLink}>Painel Secretária</Link>}
-                        <button onClick={logout} className={styles.button}>Sair</button>
-                    </>
-                ) : (
-                    <Link to="/login" className={styles.navLink}>Login</Link>
-                )}
-            </nav>
+          <nav>
+    {user ? (
+        <>
+            {user.role === 'admin' && <Link to="/admin-dashboard" className={styles.navLink}>Painel Admin</Link>}
+            {user.role === 'secretary' && <Link to="/secretary-dashboard" className={styles.navLink}>Painel Secretária</Link>}
+            {user.role === 'doctor' && <Link to="/dentist-dashboard" className={styles.navLink}>Painel do Dentista</Link>}
+            <button onClick={logout} className={styles.button}>Sair</button>
+        </>
+    ) : (
+        <Link to="/login" className={styles.navLink}>Login</Link>
+    )}
+</nav>
         </header>
     );
 };

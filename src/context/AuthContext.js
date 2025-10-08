@@ -2,9 +2,9 @@ import React, { createContext, useState, useEffect } from "react";
 import { loginUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 
-export const AuthContext = createContext(null); // A exportação precisa estar aqui
+export const AuthContext = createContext(null);
 
-export const AuthProvider = ({ children }) => { // E aqui também
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("authToken"));
   const navigate = useNavigate();
@@ -17,22 +17,27 @@ export const AuthProvider = ({ children }) => { // E aqui também
   }, [token]);
 
   const login = async (username, password) => {
-    const data = await loginUser(username, password);
-    const userWithRole = { ...data.user, role: 'admin' };
-    
-    setToken(data.token);
-    setUser(userWithRole);
-    localStorage.setItem("authToken", data.token);
-    localStorage.setItem("user", JSON.stringify(userWithRole));
+    const data = await loginUser(username, password);
 
-    if (userWithRole.role === 'admin') {
-        navigate("/admin-dashboard");
-    } else if (userWithRole.role === 'secretary') {
-        navigate("/secretary-dashboard");
-    } else {
-        navigate("/");
-    }
-  };
+    setToken(data.token);
+    setUser(data.user);
+    localStorage.setItem("authToken", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
+    
+    // Pega o 'role' e converte para minúsculas
+    const userRole = data.user.role ? data.user.role.toLowerCase() : '';
+
+    // Agora, todas as comparações usam letras minúsculas
+    if (userRole === 'admin') {
+        navigate("/admin-dashboard");
+    } else if (userRole === 'secretary') {
+        navigate("/secretary-dashboard");
+    } else if (userRole === 'doctor') {
+        navigate("/dentist-dashboard");
+    } else {
+        navigate("/");
+    }
+};
 
   const logout = () => {
     setUser(null);
