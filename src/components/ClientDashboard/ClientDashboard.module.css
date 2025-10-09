@@ -72,28 +72,17 @@
   padding: 40px;
 }
 
-/* --- Estilos da Lista de Consultas --- */
-.listaConsultas {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.itemConsulta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
+/* --- Estilos dos Cards de Agendamento --- */
+.cardAgendamento {
   background-color: #fdfdfd;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  border-radius: 8px;
+  padding: 20px;
   border-left: 5px solid var(--dourado-zayon);
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
 
-.info { display: flex; flex-direction: column; gap: 5px; }
-.paciente { font-weight: bold; font-size: 1.2em; color: var(--preto-zayon); }
-.procedimento { color: #555; }
-.horario { text-align: right; color: #333; font-weight: 500; }
+.cardAgendamento p {
+  margin: 8px 0;
+  font-size: 1.1em;
+}

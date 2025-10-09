@@ -19,12 +19,14 @@ const Login = () => {
   };
 
   return (
-    <main className={styles.main}>
-      <h2>Login no Sistema</h2>
+  <main className={styles.main}>
+    {/* Adicionamos um container para o formulário */}
+    <div className={styles.formContainer}>
+      <h2 className={styles.title}>Acesso ao Sistema</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Usuário"
+          placeholder="Digite seu usuário ou Email" // <-- TEXTO ALTERADO
           className={styles.input}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -32,7 +34,7 @@ const Login = () => {
         />
         <input
           type="password"
-          placeholder="Senha"
+          placeholder="Digite sua senha" // <-- TEXTO ALTERADO
           className={styles.input}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -41,7 +43,8 @@ const Login = () => {
         {error && <p className={styles.error}>{error}</p>}
         <button type="submit" className={styles.button}>Entrar</button>
       </form>
-    </main>
+    </div>
+  </main>
   );
 };
 

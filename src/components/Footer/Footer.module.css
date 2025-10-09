@@ -1,0 +1,26 @@
+.footer {
+  background-color: var(--preto-zayon);
+  color: var(--branco-zayon);
+  padding: 40px 20px;
+  margin-top: 60px;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contactInfo {
+  margin-bottom: 20px;
+}
+
+.contactInfo p {
+  margin: 10px 0;
+  font-size: 1.1em;
+}
+
+.copyright {
+  font-size: 0.9em;
+  opacity: 0.7;
+}

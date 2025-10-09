@@ -27,8 +27,9 @@ const CreateUserForm = ({ userType, apiService, requiredFields }) => {
     };
 
     return (
-        <div className={styles.container}>
-            <h3>Cadastrar Novo {userType}</h3>
+         <div className={styles.container}>
+            <h3 className={styles.title}>Cadastrar Novo {userType}</h3>
+            {/* A classe .form aplicada aqui usará o max-width do CSS */}
             <form onSubmit={handleSubmit} className={styles.form}>
                 {requiredFields.map(field => (
                     <input

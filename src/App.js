@@ -7,10 +7,12 @@ import AdminDashboard from "./components/AdminDashboard";
 import SecretaryDashboard from "./components/SecretaryDashboard";
 import ProtectedRoute from "./components/ProtectedRoute"; 
 import Home from "./components/Home";
+import ClientDashboard from "./components/ClientDashboard";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <>
+     <div className="app-container">
       <Header />
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -26,10 +28,15 @@ function App() {
         <Route element={<ProtectedRoute allowedRoles={['doctor']} />}>
             <Route path="/dentist-dashboard" element={<DentistDashboard />} />
         </Route>
+    <Route element={<ProtectedRoute allowedRoles={['client']} />}>
+        <Route path="/client-dashboard" element={<ClientDashboard />} />
+    </Route>
+
 
         <Route path="/" element={<Home />} />
       </Routes>
-    </>
+      <Footer/>
+    </div>
   );
 }
 export default App;

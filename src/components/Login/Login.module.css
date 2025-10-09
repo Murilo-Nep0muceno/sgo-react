@@ -1,34 +1,70 @@
+/* src/components/Login/Login.module.css */
 .main {
-    padding: 40px;
-    text-align: center;
-    max-width: 400px;
-    margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  flex-grow: 1; /* Garante que o container ocupe o espaço principal */
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background-color: var(--branco-zayon);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(141, 101, 23, 0.15);
+}
+
+.title {
+  text-align: center;
+  color: var(--dourado-zayon);
+  margin-top: 0;
+  margin-bottom: 30px;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .input {
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  padding: 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--dourado-zayon);
 }
 
 .button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+  background-image: linear-gradient(to right, #a17c34, #8d6517);
+  color: var(--branco-zayon);
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(141, 101, 23, 0.2);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(141, 101, 23, 0.4);
 }
 
 .error {
-    color: red;
-    margin-top: 10px;
+  color: #d9534f;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  border-radius: 4px;
+  padding: 10px;
+  text-align: center;
 }

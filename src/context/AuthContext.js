@@ -16,28 +16,31 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token]);
 
+  
   const login = async (username, password) => {
-    const data = await loginUser(username, password);
+    const data = await loginUser(username, password);
 
-    setToken(data.token);
-    setUser(data.user);
-    localStorage.setItem("authToken", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user));
+    setToken(data.token);
+    setUser(data.user);
+    localStorage.setItem("authToken", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
     
     // Pega o 'role' e converte para minúsculas
-    const userRole = data.user.role ? data.user.role.toLowerCase() : '';
+    const userRole = data.user.role ? data.user.role.toLowerCase() : '';
 
     // Agora, todas as comparações usam letras minúsculas
-    if (userRole === 'admin') {
-        navigate("/admin-dashboard");
-    } else if (userRole === 'secretary') {
-        navigate("/secretary-dashboard");
-    } else if (userRole === 'doctor') {
-        navigate("/dentist-dashboard");
-    } else {
-        navigate("/");
-    }
-};
+    if (userRole === 'admin') {
+        navigate("/admin-dashboard");
+    } else if (userRole === 'secretary') {
+        navigate("/secretary-dashboard");
+    } else if (userRole === 'doctor') {
+        navigate("/dentist-dashboard");
+    } else if (userRole === 'client') { // ✅ CONDIÇÃO ADICIONADA
+        navigate("/client-dashboard");
+    } else {
+        navigate("/");
+    }
+  };
 
   const logout = () => {
     setUser(null);

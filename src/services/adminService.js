@@ -1,3 +1,4 @@
+
 const API_URL = "http://localhost:3000/api/v1";
 
 const createUser = async (endpoint, userData, token) => {
@@ -30,7 +31,7 @@ export const createDoctor = (userData, token) => {
     return createUser('doctor', userData, token);
 };
 
-// NOTE: You will need to create a service for creating patients later.
-// export const createPatient = (patientData, token) => {
-//     return createUser('patient', patientData, token);
-// };
+export const createClient = (userData, token) => {
+    // Usamos 'client' porque a rota no seu backend é /api/v1/client
+    return createUser('client', userData, token);
+};

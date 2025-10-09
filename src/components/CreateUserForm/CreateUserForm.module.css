@@ -1,38 +1,83 @@
 .container {
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 20px;
-    background-color: #f9f9f9;
+  width: 100%;
+  /* Usaremos este container para centralizar o título e o formulário */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente os itens filhos */
+  padding: 20px; /* Um padding geral para o container */
+}
+
+.title {
+  color: var(--preto-zayon);
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center; /* Centraliza o texto do título */
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px; /* Mantém a largura máxima */
+  width: 100%; /* Garante que ele ocupe até o max-width */
+  padding: 0; /* Remove padding extra que possa interferir na centralização */
+  box-sizing: border-box; /* Garante que padding/border não aumentem a largura */
 }
 
 .input {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  padding: 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--dourado-zayon);
+  box-shadow: 0 0 0 3px rgba(141, 101, 23, 0.15);
 }
 
 .button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
+  background-image: linear-gradient(to right, #a17c34, #8d6517);
+  color: var(--branco-zayon);
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(141, 101, 23, 0.2);
+  margin-top: 10px;
 }
 
-.success {
-    color: green;
-    margin-top: 10px;
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(141, 101, 23, 0.4);
 }
 
-.error {
-    color: red;
-    margin-top: 10px;
+.success, .error {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  max-width: 500px; /* Limita a largura das mensagens também */
+  width: 100%; /* Garante que ele ocupe até o max-width */
+  box-sizing: border-box;
+}
+
+.success { 
+  color: #155724; 
+  background-color: #d4edda; 
+  border: 1px solid #c3e6cb; 
+}
+
+.error { 
+  color: #721c24; 
+  background-color: #f8d7da; 
+  border: 1px solid #f5c6cb; 
 }

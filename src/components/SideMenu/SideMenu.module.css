@@ -1,0 +1,32 @@
+.sideMenu {
+  background-color: #f8f9fa;
+  padding: 20px;
+  width: 250px;
+  height: 100%;
+  border-right: 1px solid #dee2e6;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: var(--preto-zayon);
+  padding: 12px 15px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.navLink:hover {
+  background-color: rgba(141, 101, 23, 0.1);
+}
+
+.active {
+  background-color: var(--dourado-zayon);
+  color: var(--branco-zayon);
+  font-weight: bold;
+}

@@ -1,31 +1,80 @@
+/* src/components/Header/Header.module.css */
+
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px; /* Aumentei o padding para mais altura e espaço lateral */
+  background-color: var(--branco-zayon);
+  box-shadow: 0 4px 12px rgba(141, 101, 23, 0.1);
+  border-bottom: 1px solid rgba(141, 101, 23, 0.2);
 }
 
 .logo {
-    text-decoration: none;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
+  text-decoration: none;
+  color: var(--dourado-zayon);
+  font-size: 1.8rem; /* Logo maior e mais destacada */
+  font-weight: 700;
+  letter-spacing: 1px; /* Espaçamento leve entre as letras */
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* Aumentei o espaço entre os links */
 }
 
 .navLink {
-    text-decoration: none;
-    color: white;
-    margin: 0 10px;
+  text-decoration: none;
+  color: var(--preto-zayon);
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 10px;
+/* Efeito de sublinhado animado no hover */
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: var(--dourado-zayon);
+  transition: width 0.3s ease-in-out;
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+.logoutButton,
+.loginButton { /* Estilo unificado para os botões */
+  background-image: linear-gradient(to right, #a17c34, #8d6517);
+  color: var(--branco-zayon);
+  border: none;
+  padding: 12px 25px; /* Botões maiores */
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(141, 101, 23, 0.2);
+  text-decoration: none; /* Garante que o link de login não seja sublinhado */
+  display: inline-block; /* Necessário para aplicar padding ao Link */
+}
+
+.logoutButton:hover,
+.loginButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(141, 101, 23, 0.4);
 }
