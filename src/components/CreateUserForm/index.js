@@ -18,18 +18,30 @@ const CreateUserForm = ({ userType, apiService, requiredFields }) => {
         setError('');
         try {
             const result = await apiService(formData, token);
-            setMessage(result.message.message);
-            setFormData({});
+
+            // 👇 LÓGICA INTELIGENTE PARA LER A MENSAGEM 👇
+            let successMessage = '';
+            // Verifica se a resposta é aninhada (formato de Admin/Doutor)
+            if (result.message && typeof result.message === 'object' && result.message.message) {
+                successMessage = result.message.message;
+            } 
+            // Senão, assume que é a resposta simples (formato de Secretária/Cliente)
+            else if (result.message) {
+                successMessage = result.message;
+            }
+
+            setMessage(successMessage);
+            
             e.target.reset();
+            setFormData({});
         } catch (err) {
             setError(err.message);
         }
     };
 
     return (
-         <div className={styles.container}>
+        <div className={styles.container}>
             <h3 className={styles.title}>Cadastrar Novo {userType}</h3>
-            {/* A classe .form aplicada aqui usará o max-width do CSS */}
             <form onSubmit={handleSubmit} className={styles.form}>
                 {requiredFields.map(field => (
                     <input
