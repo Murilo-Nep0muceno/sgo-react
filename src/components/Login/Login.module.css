@@ -68,3 +68,38 @@
   padding: 10px;
   text-align: center;
 }
+/* Adicione estas classes ao final do seu 
+  arquivo Login.module.css 
+*/
+
+/* 1. Container para posicionar o ícone "dentro" do input */
+.passwordWrapper {
+  position: relative;
+  /* Garante que o wrapper ocupe o espaço no formulário */
+  display: flex; 
+}
+
+/* 2. Ajusta o input de senha para ter espaço para o ícone */
+.passwordInput {
+  /* Adiciona espaço à direita dentro do input para o ícone não sobrepor o texto */
+  padding-right: 50px; 
+  /* Garante que o input preencha o wrapper */
+  width: 100%; 
+}
+
+/* 3. Estiliza e posiciona o ícone */
+.eyeIcon {
+  position: absolute;
+  top: 50%;
+  right: 15px; /* Alinha com o padding original do input */
+  transform: translateY(-50%); /* Centraliza verticalmente */
+  
+  cursor: pointer;
+  color: #888; /* Cor neutra para o ícone */
+  font-size: 1.2rem;
+  transition: color 0.2s;
+}
+
+.eyeIcon:hover {
+  color: var(--dourado-zayon); /* Reutiliza sua cor do tema */
+}

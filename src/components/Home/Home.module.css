@@ -59,6 +59,61 @@
   font-weight: 300;
 }
 
+
+/* ============================================= */
+/* --- [NOVO] Seção Sobre (2 Colunas) --- */
+/* ============================================= */
+
+.sobreSection {
+  padding: 80px 20px;
+  /* Cor de fundo alternada para criar contraste */
+  background-color: #f9f9f9; 
+}
+
+.sobreGrid {
+  display: grid;
+  /* 2 colunas: 1fr (texto) e 1fr (imagem) */
+  grid-template-columns: 1fr 1fr; 
+  gap: 50px; /* Espaço entre o texto e a imagem */
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center; /* Centraliza verticalmente */
+}
+
+.sobreTexto {
+  text-align: left;
+}
+
+.sobreTitle {
+  font-size: 2.2em;
+  color: var(--dourado-zayon);
+  font-weight: bold;
+  margin-bottom: 30px;
+  line-height: 1.3;
+}
+
+.sobreDescription {
+  font-size: 1.1em;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.sobreImagemContainer {
+  width: 100%;
+  height: 400px; /* Altura fixa para a imagem */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.sobreImagem {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Garante que a imagem preencha */
+}
+
+
 /* ============================================= */
 /* --- Seção de Serviços --- */
 /* ============================================= */
@@ -141,6 +196,32 @@
   .description {
     font-size: 1.2em;
   }
+
+  /* --- [NOVO] Responsividade da Seção Sobre --- */
+  .sobreGrid {
+    grid-template-columns: 1fr; /* Empilha as colunas */
+    gap: 30px;
+  }
+
+  .sobreTitle {
+    font-size: 1.8em;
+  }
+  
+  .sobreDescription {
+    font-size: 1em;
+  }
+
+  .sobreImagemContainer {
+    height: 300px; /* Altura menor no mobile */
+    /* Garante que a imagem venha depois do texto */
+    grid-row: 2; 
+  }
+  
+  .sobreTexto {
+    grid-row: 1;
+  }
+  /* --- [FIM DA NOVA RESPONSIVIDADE] --- */
+
 
   .sectionTitle {
     font-size: 1.8em;

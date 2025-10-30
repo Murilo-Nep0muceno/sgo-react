@@ -1,0 +1,139 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.modalHeader {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  position: relative; /* Para o botão fechar */
+}
+
+.modalHeader h3 {
+  margin-top: 0;
+  color: #333;
+}
+.modalHeader p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: #888;
+  cursor: pointer;
+}
+.modalCloseButton:hover {
+    color: #333;
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form label {
+  font-weight: 600;
+  margin-bottom: -10px; /* Aproxima label do input */
+  color: #444;
+}
+
+.textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical; /* Permite redimensionar verticalmente */
+  min-height: 60px;
+}
+
+.inputFile {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.inputFile:hover {
+    background-color: #f8f8f8;
+}
+
+.fileName {
+    font-size: 0.85em;
+    color: #555;
+    margin-top: -5px;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+}
+
+/* Estilos de Botão (copie do seu styles global ou defina aqui) */
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff; /* Azul */
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.secondaryButton {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f9fa; /* Cinza claro */
+  color: #333;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.secondaryButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.error {
+    color: #dc3545; /* Vermelho */
+    font-size: 0.85em;
+    margin-top: -10px;
+}

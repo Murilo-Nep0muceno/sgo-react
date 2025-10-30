@@ -291,3 +291,114 @@
     color: #842029;
     background-color: #f8d7da;
 }
+/* ... (Todo o seu CSS de 1 a 5) ... */
+
+
+/* ========================================= */
+/* --- 6. [V2] MODAL DE CONFIRMAÇÃO --- */
+/* ========================================= */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: var(--branco-zayon);
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 450px;
+  z-index: 1001;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.modalHeader h4 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--preto-zayon);
+}
+
+.modalCloseButton {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #aaa;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modalBody {
+  margin-bottom: 25px;
+}
+
+.modalBody p {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+.modalInput {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 15px;
+  box-sizing: border-box; /* Garante que o padding não quebre o layout */
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+/* [V2] Reutilizando a classe .actionButton que você já tinha */
+.modalFooter .actionButton {
+  padding: 10px 20px;
+}
+
+.cancelButton {
+  background-color: #6c757d; /* Cinza */
+}
+.cancelButton:hover {
+  background-color: #5a6268;
+}
+
+/* [V2.1] ADICIONE ESTAS NOVAS REGRAS ABAIXO */
+
+.confirmButton {
+  background-color: #a17c34; /* <-- A cor que você pediu! */
+  color: var(--branco-zayon);
+  transition: background-color 0.2s ease;
+}
+
+.confirmButton:hover {
+  background-color: #8d6517; /* Um pouco mais escuro no hover */
+}
+
+/* Garante que o estilo 'disabled' se aplique a ele também */
+.confirmButton:disabled {
+  background-color: #bdc3c7;
+  color: #7f8c8d;
+  cursor: not-allowed;
+}

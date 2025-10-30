@@ -72,3 +72,461 @@
 .timeInfo span:last-child { font-size: 0.9rem; color: #777; }
 .details h4 { margin: 0 0 5px 0; color: var(--dourado-zayon); }
 .details p { margin: 0; color: #555; }
+
+/* ... (Seus estilos existentes) ... */
+
+/* [V50] Estilos para cartão de agendamento clicável */
+.clickableCard {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    position: relative; /* Para a dica */
+}
+
+.clickableCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* [V50] Dica visual para adicionar prontuário */
+.addObservationHint {
+    position: absolute;
+    bottom: 5px;
+    right: 8px;
+    font-size: 0.75em;
+    color: #007bff; /* Azul */
+    opacity: 0; /* Escondido por padrão */
+    transition: opacity 0.2s ease-in-out;
+}
+
+.clickableCard:hover .addObservationHint {
+    opacity: 1; /* Mostra no hover */
+}
+
+/* [V50 - Opcional] Estilos de Notificação (se não tiver global) */
+.notification {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+    border: 1px solid transparent;
+}
+
+.notificationSuccess {
+    background-color: #e6f7ec; /* Verde claro */
+    border-color: #b7e1c8; /* Verde médio */
+    color: #0f5132; /* Verde escuro */
+}
+
+.notificationError {
+    background-color: #f8d7da; /* Vermelho claro */
+    border-color: #f5c2c7; /* Vermelho médio */
+    color: #842029; /* Vermelho escuro */
+}
+
+.notificationClose {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0.7;
+    padding: 0 5px;
+}
+
+.notificationClose:hover {
+    opacity: 1;
+}
+
+/* ... (Seus estilos existentes) ... */
+
+/* [V51] Estilos para cartão de agendamento clicável */
+.clickableCard {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    position: relative;
+}
+.clickableCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.appointmentItemMonth.clickableCard:hover {
+    /* Ajuste para o item de mês */
+    border: 1px solid #007bff;
+    background-color: #f0f8ff;
+}
+
+/* [V51] Dica visual para adicionar prontuário */
+.addObservationHint {
+    /* Específico para AgendaView */
+    position: absolute;
+    bottom: 5px;
+    right: 8px;
+    font-size: 0.75em;
+    color: #007bff;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+.clickableCard:hover .addObservationHint {
+    opacity: 1;
+}
+
+/* ======================================================= */
+/* [V51] ESTILOS PARA O MODAL (ObservationForm)            */
+/* ======================================================= */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.modalHeader {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.modalHeader h3 { margin-top: 0; color: #333; }
+.modalHeader p { margin: 5px 0; font-size: 0.9em; color: #555; }
+
+.modalCloseButton {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: #888;
+  cursor: pointer;
+}
+.modalCloseButton:hover { color: #333; }
+
+.modalContent .form { /* Seletor mais específico */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.modalContent .form label {
+  font-weight: 600;
+  margin-bottom: -10px;
+  color: #444;
+}
+
+.textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 60px;
+}
+
+.inputFile {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.inputFile:hover { background-color: #f8f8f8; }
+
+.fileName {
+    font-size: 0.85em;
+    color: #555;
+    margin-top: -5px;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+}
+/* Use seus botões globais ou estes */
+.modalFooter .button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.modalFooter .button:disabled { background-color: #ccc; cursor: not-allowed; }
+.modalFooter .secondaryButton {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+  color: #333;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.modalFooter .secondaryButton:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.errorText { /* Erro local do formulário */
+    color: #dc3545;
+    font-size: 0.85em;
+    margin-top: -10px;
+}
+
+/* ======================================================= */
+/* [V51] ESTILOS DE NOTIFICAÇÃO (Mova se for global)      */
+/* ======================================================= */
+.notification {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+    border: 1px solid transparent;
+}
+.notificationSuccess {
+    background-color: #e6f7ec;
+    border-color: #b7e1c8;
+    color: #0f5132;
+}
+.notificationError {
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    color: #842029;
+}
+.notificationClose {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0.7;
+    padding: 0 5px;
+}
+.notificationClose:hover { opacity: 1; }
+
+/* ... (Seus estilos existentes para .dashboardContainer, .sideMenu, etc.) ... */
+/* ... (Estilos do calendário: .calendarGrid, .dayCell, .monthView, etc.) ... */
+
+/* [V1000] Estilos para cartão de agendamento clicável */
+.clickableCard {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    position: relative;
+}
+.clickableCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* [V1000] Destaque para consulta concluída (prontuário preenchido) */
+.concluido {
+    border-left: 4px solid #198754; /* Verde (Bootstrap success) */
+    background-color: #f6fff9;
+}
+.appointmentItemMonth.concluido {
+    background-color: #d1e7dd; /* Verde mais escuro para o mês */
+    border-color: #198754;
+    color: #0f5132;
+}
+
+
+/* [V1000] Dica visual para adicionar prontuário */
+.addObservationHint {
+    position: absolute;
+    bottom: 5px;
+    right: 8px;
+    font-size: 0.75em;
+    color: #007bff;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+.clickableCard:hover .addObservationHint {
+    opacity: 1;
+}
+
+/* ======================================================= */
+/* [V1000] ESTILOS PARA O MODAL (ObservationForm)            */
+/* ======================================================= */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.modalHeader {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.modalHeader h3 { margin-top: 0; color: #333; }
+.modalHeader p { margin: 5px 0; font-size: 0.9em; color: #555; }
+
+.modalCloseButton {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: #888;
+  cursor: pointer;
+}
+.modalCloseButton:hover { color: #333; }
+
+/* [V1000] Garante que 'form' dentro do modal seja estilizado */
+.modalContent .form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.modalContent .form label {
+  font-weight: 600;
+  margin-bottom: -10px;
+  color: #444;
+}
+
+.textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 60px;
+  box-sizing: border-box; /* Garante padding correto */
+}
+
+.inputFile {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.inputFile:hover { background-color: #f8f8f8; }
+
+.fileName {
+    font-size: 0.85em;
+    color: #555;
+    margin-top: -5px;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+}
+/* Use seus botões globais ou estes */
+.modalFooter .button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.modalFooter .button:disabled { background-color: #ccc; cursor: not-allowed; }
+.modalFooter .secondaryButton {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+  color: #333;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.modalFooter .secondaryButton:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.errorText { /* Erro local do formulário */
+    color: #dc3545;
+    font-size: 0.85em;
+    margin-top: -10px;
+    font-weight: 600;
+}
+
+/* ======================================================= */
+/* [V1000] ESTILOS DE NOTIFICAÇÃO (Mova se for global)      */
+/* ======================================================= */
+.notification {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+    border: 1px solid transparent;
+    z-index: 1001; /* Acima do modal overlay */
+    position: relative; /* Garante z-index */
+}
+.notificationSuccess {
+    background-color: #e6f7ec;
+    border-color: #b7e1c8;
+    color: #0f5132;
+}
+.notificationError {
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    color: #842029;
+}
+.notificationClose {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0.7;
+    padding: 0 5px;
+}
+.notificationClose:hover { opacity: 1; }
