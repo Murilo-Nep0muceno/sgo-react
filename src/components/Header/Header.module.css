@@ -1,22 +1,27 @@
-/* src/components/Header/Header.module.css */
-
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 50px; /* Aumentei o padding para mais altura e espaço lateral */
+  padding: 20px 50px;
   background-color: var(--branco-zayon);
   box-shadow: 0 4px 12px rgba(141, 101, 23, 0.1);
   border-bottom: 1px solid rgba(141, 101, 23, 0.2);
+  position: relative;
+  z-index: 999;
+}
+body.high-contrast .header {
+  box-shadow: none;
+  border-bottom: 2px solid var(--dourado-zayon);
 }
 
 .logo {
   text-decoration: none;
   color: var(--dourado-zayon);
-  font-size: 1.8rem; /* Logo maior e mais destacada */
+  font-size: 1.8rem;
   font-weight: 700;
-  letter-spacing: 1px; /* Espaçamento leve entre as letras */
+  letter-spacing: 1px;
   transition: opacity 0.3s ease;
+  flex-shrink: 0;
 }
 
 .logo:hover {
@@ -26,7 +31,7 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 25px; /* Aumentei o espaço entre os links */
+  gap: 25px;
 }
 
 .navLink {
@@ -38,9 +43,15 @@
   border-radius: 6px;
   transition: all 0.3s ease;
   position: relative;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+body.high-contrast .navLink {
+  color: var(--preto-zayon);
 }
 
-/* Efeito de sublinhado animado no hover */
 .navLink::after {
   content: '';
   position: absolute;
@@ -52,29 +63,219 @@
   background-color: var(--dourado-zayon);
   transition: width 0.3s ease-in-out;
 }
+body.high-contrast .navLink::after {
+  background-color: var(--dourado-zayon);
+}
 
 .navLink:hover::after {
   width: 100%;
 }
 
 .logoutButton,
-.loginButton { /* Estilo unificado para os botões */
+.loginButton {
   background-image: linear-gradient(to right, #a17c34, #8d6517);
   color: var(--branco-zayon);
   border: none;
-  padding: 12px 25px; /* Botões maiores */
+  padding: 12px 25px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s ease;
   font-size: 1.1rem;
   box-shadow: 0 4px 15px rgba(141, 101, 23, 0.2);
-  text-decoration: none; /* Garante que o link de login não seja sublinhado */
-  display: inline-block; /* Necessário para aplicar padding ao Link */
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+/* --- ESTA É A CORREÇÃO DO LOGIN --- */
+body.high-contrast .logoutButton,
+body.high-contrast .loginButton {
+  background-image: none !important;
+  background-color: var(--dourado-zayon) !important;
+  color: var(--branco-zayon) !important;
+  box-shadow: none;
+  border: 2px solid var(--dourado-zayon);
 }
 
 .logoutButton:hover,
 .loginButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(141, 101, 23, 0.4);
+}
+body.high-contrast .logoutButton:hover,
+body.high-contrast .loginButton:hover {
+  box-shadow: 0 0 10px var(--dourado-zayon);
+}
+
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2.2rem;
+  color: var(--preto-zayon);
+  padding: 0;
+  line-height: 1;
+}
+
+.mobileCloseButton {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2.5rem;
+  color: var(--preto-zayon);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+body.high-contrast .overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.overlay.active {
+  display: block;
+}
+
+.logo:focus-visible,
+.navLink:focus-visible,
+.logoutButton:focus-visible,
+.loginButton:focus-visible,
+.mobileMenuButton:focus-visible,
+.mobileCloseButton:focus-visible {
+  outline: 2px solid var(--dourado-zayon);
+  outline-offset: 2px;
+}
+
+.accessibilityControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-left: 1px solid #eee;
+  padding-left: 20px;
+}
+body.high-contrast .accessibilityControls {
+  border-left: 2px solid var(--preto-zayon);
+}
+
+.accessibilityButton {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  color:black;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* --- ESTA É A CORREÇÃO DAS LUPAS --- */
+body.high-contrast .accessibilityButton {
+  background: black;
+  border: 2px solid var(--branco-zayon);
+  color: var(--branco-zayon);
+}
+
+.accessibilityButton:hover {
+  background: #e0e0e0;
+}
+body.high-contrast .accessibilityButton:hover {
+  background: black;
+}
+
+.accessibilityButton:focus-visible {
+  outline: 2px solid var(--dourado-zayon);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 15px 20px;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .mobileMenuButton {
+    display: block;
+  }
+  body.high-contrast .mobileMenuButton {
+    color: var(--preto-zayon);
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--branco-zayon);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 80px 20px 20px 20px;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1001;
+  }
+  body.high-contrast .nav {
+    background-color: var(--branco-zayon);
+    box-shadow: -4px 0 15px var(--dourado-zayon);
+  }
+
+  .nav.mobileMenuOpen {
+    transform: translateX(0);
+  }
+
+  .mobileCloseButton {
+    display: block;
+  }
+  body.high-contrast .mobileCloseButton {
+    color: var(--preto-zayon);
+  }
+
+  .navLink,
+  .logoutButton,
+  .loginButton {
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+  }
+
+  .navLink::after {
+    display: none;
+  }
+
+  .accessibilityControls {
+    padding-top: 15px;
+    margin-top: 15px;
+    border-top: 1px solid #eee;
+    border-left: none;
+    padding-left: 0;
+    width: 100%;
+    justify-content: space-around;
+  }
+  body.high-contrast .accessibilityControls {
+    border-top: 2px solid var(--preto-zayon);
+    border-left: none;
+  }
 }

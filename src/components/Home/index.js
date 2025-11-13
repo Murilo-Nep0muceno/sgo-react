@@ -1,12 +1,9 @@
 import React from "react";
 import styles from "./Home.module.css";
 
-// IMAGENS DOS SERVIÇOS
 import imgImplante from "../../assets/implanteDentario.jpg";
 import clareamentoDental from "../../assets/clareamentoDental.jpg";
 import proxila from "../../assets/proxila.jpg";
-
-// --
 import imagemDaClinica from "../../assets/coinsultorio.jpg";
 
 const servicos = [
@@ -29,24 +26,18 @@ const servicos = [
 
 const Home = () => {
   return (
-    // --- [ALTERADO] ---
-    // Adicionei a classe .main que estava faltando
     <main className={styles.main}>
-      <div className={styles.hero}>
+      <section className={styles.hero}>
         <h1 className={styles.title}>Záyon Odontologia Humanizada</h1>
         <p className={styles.description}>
           Clínica odontológica especializada em cuidar do seu sorriso com
           excelência e atendimento personalizado.
         </p>
-      </div>
+      </section>
 
-      {/* ============================================= */}
-      {/* --- [NOVA SEÇÃO SOBRE NÓS] --- */}
-      {/* ============================================= */}
       <section className={styles.sobreSection}>
         <div className={styles.sobreGrid}>
           
-          {/* Coluna 1: Texto */}
           <div className={styles.sobreTexto}>
             <h2 className={styles.sobreTitle}>
               Záyon Odontologia: atendimento especializado e com exames no local
@@ -62,33 +53,27 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Coluna 2: Imagem */}
           <div className={styles.sobreImagemContainer}>
-            <img 
-              src={imagemDaClinica} 
-              alt="Interior da clínica Záyon Odontologia" 
-              className={styles.sobreImagem} 
+            <img
+              src={imagemDaClinica}
+              alt="Interior da clínica Záyon Odontologia"
+              className={styles.sobreImagem}
             />
           </div>
 
         </div>
       </section>
-      {/* --- [FIM DA NOVA SEÇÃO] --- */}
 
-
-      {/* ============================================= */}
-      {/* --- Seção de Serviços (Existente) --- */}
-      {/* ============================================= */}
       <section className={styles.servicosSection}>
         <h2 className={styles.sectionTitle}>Nossos Serviços</h2>
         <div className={styles.servicosGrid}>
           {servicos.map((servico, index) => (
             <div key={index} className={styles.servicoCard}>
               <div className={styles.imageContainer}>
-                <img 
-                  src={servico.imagem} 
-                  alt={servico.titulo} 
-                  className={styles.servicoImagem} 
+                <img
+                  src={servico.imagem}
+                  alt={servico.titulo}
+                  className={styles.servicoImagem}
                 />
               </div>
               <h3 className={styles.cardTitle}>{servico.titulo}</h3>

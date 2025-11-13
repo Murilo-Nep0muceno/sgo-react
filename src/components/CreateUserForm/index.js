@@ -1,73 +1,130 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import styles from './CreateUserForm.module.css';
-// --- [ 1. IMPORTAR O TRADUTOR ] ---
 import { translateErrorMessage } from '../helpers/errorTranslator';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
-// --- [ 2. ADICIONAR onUserCreated NAS PROPS ] ---
+const fieldConfig = {
+  username: { label: "Nome de Usuário", type: "text" },
+  password: { label: "Senha", type: "password" },
+  email: { label: "Email", type: "email" },
+  telephone: { label: "Telefone", type: "tel", placeholder: "11987654321" },
+  cro: { label: "CRO", type: "text" },
+};
+
+const FeedbackMessage = ({ type, message }) => {
+  if (!message) return null;
+  const role = type === 'error' ? 'alert' : 'status';
+  return <p className={styles[type]} role={role}>{message}</p>;
+};
+
 const CreateUserForm = ({ userType, apiService, requiredFields, onUserCreated }) => {
-    const { token } = useAuth();
-    const [formData, setFormData] = useState({});
-    const [message, setMessage] = useState('');
-    const [error, setError] = useState('');
+  const { token } = useAuth();
+  const [formData, setFormData] = useState({});
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
- setMessage('');
-        setError('');
-        try {
-            const result = await apiService(formData, token);
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
-            // Lógica inteligente para ler a mensagem
-            let successMessage = '';
-            if (result.message && typeof result.message === 'object' && result.message.message) {
-                successMessage = result.message.message;
-            } 
-            else if (result.message) {
-                successMessage = result.message;
-            }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage('');
+    setError('');
+    try {
+      const result = await apiService(formData, token);
 
-            setMessage(successMessage);
-            
-            e.target.reset();
-            setFormData({});
-            
-            // --- [ 3. CHAMAR A FUNÇÃO onUserCreated ] ---
-            if (onUserCreated) {
-                onUserCreated();
-            }
-            
-        } catch (err) {
-            // --- [ 4. USAR O TRADUTOR AQUI ] ---
-            setError(translateErrorMessage(err.message));
-        }
-    };
+      let successMessage = '';
+      if (result.message && typeof result.message === 'object' && result.message.message) {
+        successMessage = result.message.message;
+      }
+      else if (result.message) {
+        successMessage = result.message;
+      }
 
-    return (
-        <div className={styles.container}>
-            <h3 className={styles.title}>Cadastrar Novo {userType}</h3>
-            <form onSubmit={handleSubmit} className={styles.form}>
-                {requiredFields.map(field => (
-                    <input
-                        key={field}
-                        type={field === 'password' ? 'password' : 'text'}
-                        name={field}
-                        placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                        onChange={handleChange}
-                        className={styles.input}
-                        required
-                    />
-                ))}
-                <button type="submit" className={styles.button}>Cadastrar</button>
-            </form>
-            {message && <p className={styles.success}>{message}</p>}
-            {error && <p className={styles.error}>{error}</p>}
-        </div>
-    );
+      setMessage(successMessage);
+      
+      e.target.reset();
+      setFormData({});
+      
+      if (onUserCreated) {
+        onUserCreated();
+      }
+      
+    } catch (err) {
+      setError(translateErrorMessage(err.message));
+    }
+  };
+
+  return (
+    <>
+      <h3 className={styles.title}>Cadastrar Novo {userType}</h3>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        {requiredFields.map(field => {
+          const config = fieldConfig[field] || { label: field.charAt(0).toUpperCase() + field.slice(1), type: "text" };
+
+          if (config.type === 'password') {
+            return (
+              <div key={field} className={styles.formGroup}>
+                <label htmlFor={field} className={styles.label}>{config.label}</label>
+                <div className={styles.passwordWrapper}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id={field}
+                    name={field}
+                    onChange={handleChange}
+                    className={`${styles.input} ${styles.passwordInput}`}
+                    required
+                    autoComplete="new-password"
+                  />
+                  {showPassword ? (
+                    <FiEye 
+                      className={styles.eyeIcon} 
+                      onClick={toggleShowPassword} 
+                      aria-label="Ocultar senha" 
+                      role="button"
+                    />
+                  ) : (
+                    <FiEyeOff 
+                      className={styles.eyeIcon} 
+                      onClick={toggleShowPassword} 
+                      aria-label="Mostrar senha" 
+                      role="button"
+                    />
+                  )}
+                </div>
+              </div>
+            );
+          }
+
+          return (
+            <div key={field} className={styles.formGroup}>
+              <label htmlFor={field} className={styles.label}>{config.label}</label>
+              <input
+                type={config.type}
+                id={field}
+                name={field}
+                placeholder={config.placeholder || ''}
+                onChange={handleChange}
+                className={styles.input}
+                required
+                autoComplete={field === 'email' ? 'email' : (field === 'telephone' ? 'tel' : 'off')}
+              />
+            </div>
+          );
+        })}
+        <button type="submit" className={styles.button}>Cadastrar</button>
+      </form>
+      <FeedbackMessage type="success" message={message} />
+      <FeedbackMessage type="error" message={error} />
+    </>
+  );
 };
 
 export default CreateUserForm;

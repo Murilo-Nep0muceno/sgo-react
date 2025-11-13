@@ -1,10 +1,9 @@
-/* src/components/Login/Login.module.css */
 .main {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px;
-  flex-grow: 1; /* Garante que o container ocupe o espaço principal */
+  padding: 40px 15px;
+  flex-grow: 1;
 }
 
 .formContainer {
@@ -14,6 +13,11 @@
   background-color: var(--branco-zayon);
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(141, 101, 23, 0.15);
+}
+
+body.high-contrast .formContainer {
+  border: 2px solid var(--dourado-zayon);
+  box-shadow: none;
 }
 
 .title {
@@ -29,17 +33,49 @@
   gap: 20px;
 }
 
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  font-weight: 500;
+  color: var(--preto-zayon);
+}
+
 .input {
   padding: 15px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--cinza-medio);
   border-radius: 6px;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--branco-zayon);
+  color: var(--preto-zayon);
+}
+
+body.high-contrast .input {
+  background-color: var(--cinza-claro);
+  border: 2px solid var(--preto-zayon);
 }
 
 .input:focus {
   outline: none;
   border-color: var(--dourado-zayon);
+  box-shadow: 0 0 0 3px rgba(141, 101, 23, 0.15);
+}
+
+body.high-contrast .input:focus {
+   border-color: var(--dourado-zayon);
+   box-shadow: 0 0 0 2px var(--dourado-zayon);
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--dourado-zayon);
+  outline-offset: 1px;
+  box-shadow: none;
 }
 
 .button {
@@ -55,9 +91,27 @@
   box-shadow: 0 4px 15px rgba(141, 101, 23, 0.2);
 }
 
+body.high-contrast .button {
+  background-image: none !important;
+  background-color: var(--dourado-zayon) !important;
+  color: var(--branco-zayon) !important;
+  box-shadow: none;
+  border: 2px solid var(--dourado-zayon);
+}
+
 .button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(141, 101, 23, 0.4);
+}
+
+body.high-contrast .button:hover {
+  transform: none;
+  box-shadow: 0 0 10px var(--dourado-zayon);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--dourado-zayon);
+  outline-offset: 2px;
 }
 
 .error {
@@ -67,39 +121,45 @@
   border-radius: 4px;
   padding: 10px;
   text-align: center;
+  font-weight: 500;
 }
-/* Adicione estas classes ao final do seu 
-  arquivo Login.module.css 
-*/
 
-/* 1. Container para posicionar o ícone "dentro" do input */
+body.high-contrast .error {
+  background-color: var(--branco-zayon);
+  color: #FF5555;
+  border: 2px solid #FF5555;
+}
+
 .passwordWrapper {
   position: relative;
-  /* Garante que o wrapper ocupe o espaço no formulário */
-  display: flex; 
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-/* 2. Ajusta o input de senha para ter espaço para o ícone */
+.passwordInputWrapper {
+  position: relative;
+  display: flex;
+}
+
 .passwordInput {
-  /* Adiciona espaço à direita dentro do input para o ícone não sobrepor o texto */
-  padding-right: 50px; 
-  /* Garante que o input preencha o wrapper */
-  width: 100%; 
+  padding-right: 50px;
+  width: 100%;
 }
 
-/* 3. Estiliza e posiciona o ícone */
 .eyeIcon {
   position: absolute;
   top: 50%;
-  right: 15px; /* Alinha com o padding original do input */
-  transform: translateY(-50%); /* Centraliza verticalmente */
-  
+  right: 15px;
+  transform: translateY(-50%);
   cursor: pointer;
-  color: #888; /* Cor neutra para o ícone */
+  color: var(--preto-zayon);
+  opacity: 0.7;
   font-size: 1.2rem;
   transition: color 0.2s;
 }
 
 .eyeIcon:hover {
-  color: var(--dourado-zayon); /* Reutiliza sua cor do tema */
+  color: var(--dourado-zayon);
+  opacity: 1;
 }

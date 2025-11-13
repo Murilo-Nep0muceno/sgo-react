@@ -1,29 +1,28 @@
-.container {
-  width: 100%;
-  /* Usaremos este container para centralizar o título e o formulário */
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centraliza horizontalmente os itens filhos */
-  padding: 20px; /* Um padding geral para o container */
-}
-
 .title {
   color: var(--preto-zayon);
   margin-top: 0;
   margin-bottom: 30px;
   font-size: 1.8rem;
   font-weight: 600;
-  text-align: center; /* Centraliza o texto do título */
+  text-align: center;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 500px; /* Mantém a largura máxima */
-  width: 100%; /* Garante que ele ocupe até o max-width */
-  padding: 0; /* Remove padding extra que possa interferir na centralização */
-  box-sizing: border-box; /* Garante que padding/border não aumentem a largura */
+  width: 100%;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  font-weight: 500;
+  color: #333;
 }
 
 .input {
@@ -32,12 +31,20 @@
   border: 1px solid #ccc;
   border-radius: 6px;
   transition: border-color 0.3s, box-shadow 0.3s;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .input:focus {
   outline: none;
   border-color: var(--dourado-zayon);
   box-shadow: 0 0 0 3px rgba(141, 101, 23, 0.15);
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--dourado-zayon);
+  outline-offset: 1px;
+  box-shadow: none;
 }
 
 .button {
@@ -59,25 +66,55 @@
   box-shadow: 0 6px 20px rgba(141, 101, 23, 0.4);
 }
 
-.success, .error {
+.button:focus-visible {
+  outline: 2px solid var(--dourado-zayon);
+  outline-offset: 2px;
+}
+
+.success,
+.error {
   margin-top: 20px;
   padding: 12px;
   border-radius: 6px;
   text-align: center;
   font-weight: 500;
-  max-width: 500px; /* Limita a largura das mensagens também */
-  width: 100%; /* Garante que ele ocupe até o max-width */
+  width: 100%;
   box-sizing: border-box;
 }
 
-.success { 
-  color: #155724; 
-  background-color: #d4edda; 
-  border: 1px solid #c3e6cb; 
+.success {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
 }
 
-.error { 
-  color: #721c24; 
-  background-color: #f8d7da; 
-  border: 1px solid #f5c6cb; 
+.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+}
+
+.passwordWrapper {
+  position: relative;
+  display: flex;
+}
+
+.passwordInput {
+  padding-right: 50px;
+  width: 100%;
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  font-size: 1.2rem;
+  transition: color 0.2s;
+}
+
+.eyeIcon:hover {
+  color: var(--dourado-zayon);
 }

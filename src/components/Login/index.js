@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-// --- [ 1. IMPORTAR ÍCONES ] ---
-import { FiEye, FiEyeOff } from "react-icons/fi"; // (Sem alteração aqui)
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useAuth } from "../../hooks/useAuth";
 import styles from "./Login.module.css";
 
@@ -9,9 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login } = useAuth();
-
-  // --- [ 2. ESTADO DE VISIBILIDADE ] ---
-  const [showPassword, setShowPassword] = useState(false); // (Sem alteração aqui)
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,12 +16,11 @@ const Login = () => {
     try {
       await login(username, password);
     } catch (error) {
-      setError(error.message);
+      setError(error.message || "Falha no login. Verifique seu usuário e senha.");
     }
   };
 
-  // --- [ 3. FUNÇÃO TOGGLE ] ---
-  const toggleShowPassword = () => { // (Sem alteração aqui)
+  const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
@@ -33,44 +29,57 @@ const Login = () => {
       <div className={styles.formContainer}>
         <h2 className={styles.title}>Acesso ao Sistema</h2>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Digite seu usuário ou Email"
-            className={styles.input}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-
-          {/* --- [ 4. CONTAINER ] --- */}
-          <div className={styles.passwordWrapper}> {/* (Sem alteração aqui) */}
+          
+          <div className={styles.formGroup}>
+            <label htmlFor="login-username" className={styles.label}>
+              Usuário ou Email
+            </label>
             <input
-              type={showPassword ? "text" : "password"} // (Sem alteração aqui)
-              placeholder="Digite sua senha"
-              className={`${styles.input} ${styles.passwordInput}`} 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              id="login-username"
+              type="text"
+              placeholder="Digite seu usuário ou Email"
+              className={styles.input}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
+              autoComplete="username"
             />
-            {/* --- [ 5. O ÍCONE (LÓGICA CORRIGIDA) ] --- */}
-            {showPassword ? ( 
-              // Se a senha ESTÁ visível (showPassword = true), mostre o olho ABERTO
-              // (Clicar nele vai OCULTAR)
-              <FiEye // <-- CORRIGIDO
-                className={styles.eyeIcon} 
-                onClick={toggleShowPassword} 
+          </div>
+
+          <div className={styles.passwordWrapper}>
+            <label htmlFor="login-password" className={styles.label}>
+              Senha
+            </label>
+            <div className={styles.passwordInputWrapper}>
+              <input
+                id="login-password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Digite sua senha"
+                className={`${styles.input} ${styles.passwordInput}`}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                autoComplete="current-password"
               />
-            ) : (
-              // Se a senha ESTÁ oculta (showPassword = false), mostre o olho CORTADO
-              // (Clicar nele vai MOSTRAR)
-              <FiEyeOff // <-- CORRIGIDO
-                className={styles.eyeIcon} 
-                onClick={toggleShowPassword} 
-              />
-            )}
+              {showPassword ? (
+                <FiEye
+                  className={styles.eyeIcon}
+                  onClick={toggleShowPassword}
+                  aria-label="Ocultar senha"
+                  role="button"
+                />
+              ) : (
+                <FiEyeOff
+                  className={styles.eyeIcon}
+                  onClick={toggleShowPassword}
+                  aria-label="Mostrar senha"
+                  role="button"
+                />
+              )}
+            </div>
           </div>
           
-          {error && <p className={styles.error}>{error}</p>}
+          {error && <p className={styles.error} role="alert">{error}</p>}
           <button type="submit" className={styles.button}>Entrar</button>
         </form>
       </div>

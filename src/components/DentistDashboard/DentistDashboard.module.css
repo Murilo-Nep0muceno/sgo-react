@@ -1,378 +1,611 @@
-/* src/components/DentistDashboard/DentistDashboard.module.css */
-
-/* --- ESTILOS GERAIS DO DASHBOARD --- */
-.dashboardContainer { display: flex; gap: 30px; padding: 30px; background-color: #f9f9f9; min-height: calc(100vh - 155px); }
-.sideMenu { width: 250px; flex-shrink: 0; background-color: var(--branco-zayon); border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); padding: 20px; }
-.welcomeMessage { text-align: center; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
-.welcomeMessage p { margin: 0; color: #555; }
-.welcomeMessage strong { font-size: 1.2rem; color: var(--dourado-zayon); }
-.nav { display: flex; flex-direction: column; gap: 10px; }
-.menuButton { width: 100%; padding: 15px; border: none; background-color: transparent; text-align: left; font-size: 1rem; font-weight: 500; color: var(--preto-zayon); border-radius: 6px; cursor: pointer; transition: all 0.2s ease-in-out; }
-.menuButton:hover { background-color: rgba(141, 101, 23, 0.1); color: var(--dourado-zayon); }
-.menuButton.active { background-color: var(--dourado-zayon); color: var(--branco-zayon); }
-.contentArea { flex-grow: 1; background-color: var(--branco-zayon); border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); padding: 40px; }
-
-/* --- ESTILOS DO FORMULÁRIO DE CRIAÇÃO --- */
-.form { display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin-top: 20px; }
-.label { font-weight: 500; color: #333; margin-bottom: -5px; }
-.input { padding: 12px; font-size: 1rem; border: 1px solid #ccc; border-radius: 6px; }
-.button { background-image: linear-gradient(to right, #a17c34, #8d6517); color: var(--branco-zayon); border: none; padding: 15px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; font-size: 1.1rem; margin-top: 10px; }
-.button:hover { transform: translateY(-2px); }
-.success, .error { margin-top: 20px; padding: 12px; border-radius: 6px; text-align: center; font-weight: 500; max-width: 600px; }
-.success { color: #155724; background-color: #d4edda; }
-.error { color: #721c24; background-color: #f8d7da; }
-
-.tabsContainer { display: flex; gap: 5px; margin-bottom: 25px; border-bottom: 1px solid #dee2e6; }
-.tabsContainer button { padding: 10px 20px; border: none; background-color: transparent; font-size: 1rem; font-weight: 500; cursor: pointer; border-bottom: 3px solid transparent; color: #495057; transition: all 0.2s ease; }
-.tabsContainer .activeTab { color: var(--dourado-zayon); border-bottom-color: var(--dourado-zayon); }
-.infoText { background-color: #f8f9fa; border-left: 4px solid var(--dourado-zayon); padding: 15px; margin: 10px 0; border-radius: 4px; font-style: italic; color: #495057; }
-.weekdaysContainer { margin-top: 15px; display: flex; flex-direction: column; gap: 10px; border: 1px solid #eee; padding: 15px; border-radius: 8px; }
-.weekdayRow { display: grid; grid-template-columns: auto 1fr auto auto auto; gap: 10px; align-items: center; padding: 8px; border-radius: 6px; transition: background-color 0.2s; }
-.weekdayRow.enabled { background-color: #f9f9f9; }
-.weekdayRow label { font-weight: 500; cursor: pointer; }
-.weekdayRow input[type="time"] { padding: 8px; border: 1px solid #ccc; border-radius: 5px; }
-.weekdayRow input[type="time"]:disabled { background-color: #e9ecef; cursor: not-allowed; }
-
-/* --- ESTILOS DO CALENDÁRIO E VISUALIZAÇÕES --- */
-.calendarHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
-.headerNav { display: flex; align-items: center; gap: 15px; }
-.headerNav h2 { margin: 0; font-size: 1.5rem; color: var(--preto-zayon); }
-.headerNav button { background: none; border: 1px solid #ccc; padding: 8px 12px; border-radius: 5px; cursor: pointer; }
-.viewModeButtons { display: flex; gap: 5px; }
-.viewModeButtons button { padding: 8px 15px; border: 1px solid #ddd; background-color: #f0f0f0; cursor: pointer; font-weight: 500; border-radius: 6px; }
-.viewModeButtons button:hover { background-color: #e0e0e0; }
-.viewModeButtons button.active { background-color: var(--dourado-zayon); color: var(--branco-zayon); border-color: var(--dourado-zayon); }
-.calendarGrid { display: grid; border-top: 1px solid #ddd; border-left: 1px solid #ddd; }
-.monthView { grid-template-columns: repeat(7, 1fr); }
-.weekView { grid-template-columns: repeat(7, 1fr); min-height: 60vh; }
-.gridHeader { text-align: center; padding: 10px; font-weight: bold; background-color: #f9f9f9; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; }
-.dayCell { min-height: 120px; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 5px; position: relative; cursor: pointer; transition: background-color 0.2s; }
-.dayCell:hover { background-color: #f0f0f0; }
-.dayCell span { font-weight: 500; }
-.notCurrentMonth { background-color: #f7f7f7; color: #aaa; }
-.today span { background-color: var(--dourado-zayon); color: white; border-radius: 50%; padding: 5px 8px; }
-
-.scheduleItem { background-color: rgba(141, 101, 23, 0.2); border-left: 3px solid var(--dourado-zayon); padding: 3px 6px; border-radius: 4px; font-size: 0.8rem; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.appointmentItemMonth { background-color: #e3f2fd; border-left: 3px solid #2196f3; padding: 2px 5px; font-size: 0.75rem; border-radius: 3px; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.dayColumn { display: flex; flex-direction: column; border-right: 1px solid #ddd; }
-.dayColumn:last-child { border-right: none; }
-.dayColumn .gridHeader { cursor: pointer; }
-.dayColumn .gridHeader:hover { background-color: #efefef; }
-.dayContent { padding: 8px; flex-grow: 1; display: flex; flex-direction: column; gap: 8px; }
-.noItems { color: #999; font-size: 0.9rem; text-align: center; margin-top: 20px; }
-.appointmentItem { background-color: #fff; border-left: 4px solid #1e88e5; padding: 8px 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-.appointmentItem p { margin: 0; }
-.appointmentTime { font-weight: bold; font-size: 0.9rem; }
-.patientName { font-size: 0.85rem; color: #333; }
-
-.agendaContainer { display: flex; flex-direction: column; gap: 15px; }
-.appointmentCard { display: flex; gap: 20px; background-color: #f9f9f9; padding: 20px; border-radius: 8px; border-left: 5px solid var(--dourado-zayon); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-.timeInfo { display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; color: var(--preto-zayon); border-right: 1px solid #ddd; padding-right: 20px; }
-.timeInfo span:first-child { font-size: 1.2rem; }
-.timeInfo span:last-child { font-size: 0.9rem; color: #777; }
-.details h4 { margin: 0 0 5px 0; color: var(--dourado-zayon); }
-.details p { margin: 0; color: #555; }
-
-/* ... (Seus estilos existentes) ... */
-
-/* [V50] Estilos para cartão de agendamento clicável */
-.clickableCard {
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    position: relative; /* Para a dica */
+/* --- LAYOUT GERAL --- */
+.dashboardContainer {
+  display: flex;
+  gap: 30px;
+  padding: 30px;
+  background-color: #f9f9f9;
+  min-height: calc(100vh - 155px);
 }
 
-.clickableCard:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.sideMenu {
+  width: 250px;
+  flex-shrink: 0;
+  background-color: var(--branco-zayon);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  height: fit-content;
 }
 
-/* [V50] Dica visual para adicionar prontuário */
-.addObservationHint {
-    position: absolute;
-    bottom: 5px;
-    right: 8px;
-    font-size: 0.75em;
-    color: #007bff; /* Azul */
-    opacity: 0; /* Escondido por padrão */
-    transition: opacity 0.2s ease-in-out;
+.welcomeMessage {
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
 }
 
-.clickableCard:hover .addObservationHint {
-    opacity: 1; /* Mostra no hover */
+.welcomeMessage p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
 }
 
-/* [V50 - Opcional] Estilos de Notificação (se não tiver global) */
-.notification {
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.95em;
-    border: 1px solid transparent;
+.welcomeMessage strong {
+  font-size: 1.3rem;
+  color: var(--dourado-zayon);
+  display: block;
+  margin-top: 5px;
 }
 
-.notificationSuccess {
-    background-color: #e6f7ec; /* Verde claro */
-    border-color: #b7e1c8; /* Verde médio */
-    color: #0f5132; /* Verde escuro */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.notificationError {
-    background-color: #f8d7da; /* Vermelho claro */
-    border-color: #f5c2c7; /* Vermelho médio */
-    color: #842029; /* Vermelho escuro */
-}
-
-.notificationClose {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    line-height: 1;
-    color: inherit;
-    cursor: pointer;
-    opacity: 0.7;
-    padding: 0 5px;
-}
-
-.notificationClose:hover {
-    opacity: 1;
-}
-
-/* ... (Seus estilos existentes) ... */
-
-/* [V51] Estilos para cartão de agendamento clicável */
-.clickableCard {
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    position: relative;
-}
-.clickableCard:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.appointmentItemMonth.clickableCard:hover {
-    /* Ajuste para o item de mês */
-    border: 1px solid #007bff;
-    background-color: #f0f8ff;
-}
-
-/* [V51] Dica visual para adicionar prontuário */
-.addObservationHint {
-    /* Específico para AgendaView */
-    position: absolute;
-    bottom: 5px;
-    right: 8px;
-    font-size: 0.75em;
-    color: #007bff;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-}
-.clickableCard:hover .addObservationHint {
-    opacity: 1;
-}
-
-/* ======================================================= */
-/* [V51] ESTILOS PARA O MODAL (ObservationForm)            */
-/* ======================================================= */
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+.menuButton {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--preto-zayon);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 1000;
+  gap: 10px;
 }
 
-.modalContent {
-  background-color: #fff;
-  padding: 25px;
-  border-radius: 8px;
-  max-width: 600px;
-  width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+.menuButton:hover {
+  background-color: rgba(141, 101, 23, 0.08);
+  color: var(--dourado-zayon);
+  transform: translateX(5px);
 }
 
-.modalHeader {
-  border-bottom: 1px solid #eee;
+.menuButton.active {
+  background-color: var(--dourado-zayon);
+  color: var(--branco-zayon);
+  box-shadow: 0 4px 12px rgba(141, 101, 23, 0.25);
+}
+
+.contentArea {
+  flex-grow: 1;
+  background-color: var(--branco-zayon);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 40px;
+  overflow-x: hidden;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #f0f0f0;
   padding-bottom: 15px;
-  margin-bottom: 20px;
-  position: relative;
 }
-.modalHeader h3 { margin-top: 0; color: #333; }
-.modalHeader p { margin: 5px 0; font-size: 0.9em; color: #555; }
 
-.modalCloseButton {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background: none;
-  border: none;
+.pageHeader h2 {
+  margin: 0;
+  color: var(--preto-zayon);
   font-size: 1.8rem;
-  line-height: 1;
-  color: #888;
-  cursor: pointer;
+  font-weight: 600;
 }
-.modalCloseButton:hover { color: #333; }
 
-.modalContent .form { /* Seletor mais específico */
+/* --- ELEMENTOS DE UI GERAIS --- */
+.searchContainer {
+  margin-bottom: 20px;
+  display: flex;
+  width: 100%;
+}
+
+.searchInput {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.searchInput:focus {
+  border-color: var(--dourado-zayon);
+  box-shadow: 0 0 0 3px rgba(141, 101, 23, 0.15);
+  outline: none;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px; 
+  margin-top: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-weight: 600;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.input {
+  padding: 14px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.button {
+  background-image: linear-gradient(to right, #a17c34, #8d6517);
+  color: var(--branco-zayon);
+  border: none;
+  padding: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  margin-top: 15px;
+  box-shadow: 0 4px 15px rgba(141, 101, 23, 0.2);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(141, 101, 23, 0.3);
+}
+
+/* --- CONFIGURAÇÃO DE DIAS DA SEMANA (CORRIGIDO) --- */
+.weekdaysConfig {
+  margin-top: 30px; /* Aumentado para o título não encostar */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid #e0e0e0;
+  padding: 25px; 
+  border-radius: 12px;
+  background-color: #fff;
+}
+
+/* Estilo do Legend (O Título "Horários...") */
+.weekdaysConfig legend {
+  width: auto;
+  padding: 0 10px; /* Cria espaço na borda para o texto */
+  margin-left: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--preto-zayon);
+}
+
+/* Remove margem do h4 dentro do legend para alinhar corretamente */
+.weekdaysConfig legend h4 {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  font-size: 1.1rem;
+  color: inherit;
+}
+
+.weekdayRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background-color: #fdfdfd;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.weekdayRow.enabled {
+  background-color: #f4f8fb;
+  border-color: #e3effa;
+}
+
+.weekdayRowTop {
+  display: flex;
+  align-items: center;
+  min-width: 130px;
+}
+
+.weekdayCheckboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #444;
+  font-size: 1rem;
+}
+
+.weekdayCheckboxLabel input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--dourado-zayon);
+}
+
+.weekdayRowBottom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Inputs de hora */
+.inputTime {
+  padding: 10px 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 145px; /* Largura suficiente para não cortar "00:00" e ícone */
+  text-align: center;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #333;
+}
+
+.inputTime:disabled {
+  background-color: #eee;
+  color: #999;
+  border-color: #ddd;
+}
+
+.tabsContainer,
+.tabButtons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tabsContainer button,
+.tabButtons button {
+  padding: 12px 25px;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.tabsContainer .activeTab,
+.tabButtons .active {
+  color: var(--dourado-zayon);
+  border-bottom-color: var(--dourado-zayon);
+  font-weight: 600;
+}
+
+/* --- TABELA DE PACIENTES --- */
+.tableContainer {
+  overflow-x: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.03);
+  border: 1px solid #eee;
+}
+
+.userTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.userTable th,
+.userTable td {
+  padding: 18px 20px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+
+.userTable th {
+  background-color: #fafafa;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.userTable tbody tr:hover {
+  background-color: #fdfdfd;
+}
+
+.actionsCell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 220px; 
+  min-width: 220px;
+  max-width: 220px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* --- BOTÕES DE ÍCONE --- */
+.iconButton {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  color: #555;
+  cursor: pointer;
+  font-size: 1rem;
+  height: 40px; 
+  border-radius: 20px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  position: relative;
+  width: 40px; 
+  min-width: 40px;
+  transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.iconButton svg {
+  font-size: 1.2rem;
+  min-width: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.iconButton span {
+  opacity: 0;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding-right: 15px;
+  transform: translateX(-10px);
+  transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+}
+
+.iconButton:hover {
+  width: 130px; 
+}
+
+.iconButton:hover span {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.iconButton.email:hover {
+  border-color: #007bff;
+  background-color: #e7f1ff;
+  color: #007bff;
+}
+
+.iconButton.whatsapp:hover {
+  border-color: #25D366;
+  background-color: #e8f8f0;
+  color: #25D366;
+}
+
+/* --- CALENDÁRIO --- */
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.headerNav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.headerNav h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: var(--preto-zayon);
+}
+
+.headerNav button {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.headerNav button:hover {
+  background-color: #f5f5f5;
+  border-color: #ccc;
+}
+
+.viewModeButtons {
+  display: flex;
+  gap: 8px;
+  background-color: #f0f0f0;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.viewModeButtons button {
+  padding: 8px 16px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 6px;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.viewModeButtons button.active {
+  background-color: #fff;
+  color: var(--dourado-zayon);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  font-weight: 600;
+}
+
+.calendarGrid {
+  display: grid;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.monthView {
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekView {
+  grid-template-columns: repeat(7, 1fr);
+  min-height: 60vh;
+}
+
+.gridHeader {
+  text-align: center;
+  padding: 15px 10px;
+  font-weight: 600;
+  background-color: #f8f9fa;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  color: #555;
+}
+
+.dayCell {
+  min-height: 120px;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dayCell:hover {
+  background-color: #fafafa;
+}
+
+.today span {
+  background-color: var(--dourado-zayon);
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.appointmentItemMonth {
+  background-color: #eef6fc;
+  border-left: 3px solid #2196f3;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  margin-top: 5px;
+  color: #1565c0;
+  font-weight: 500;
+}
+
+.scheduleItem {
+  background-color: rgba(141, 101, 23, 0.1);
+  border-left: 3px solid var(--dourado-zayon);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  color: #6d4c05;
+}
+
+.appointmentItem {
+  background-color: #fff;
+  border-left: 4px solid #1e88e5;
+  padding: 8px 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  margin-bottom: 5px;
+}
+
+.appointmentTime {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.patientName {
+  font-size: 0.85rem;
+  color: #333;
+}
+
+.agendaContainer {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-.modalContent .form label {
-  font-weight: 600;
-  margin-bottom: -10px;
-  color: #444;
-}
 
-.textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  resize: vertical;
-  min-height: 60px;
-}
-
-.inputFile {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-}
-.inputFile:hover { background-color: #f8f8f8; }
-
-.fileName {
-    font-size: 0.85em;
-    color: #555;
-    margin-top: -5px;
-}
-
-.modalFooter {
+.appointmentCard {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
-  margin-top: 20px;
-}
-/* Use seus botões globais ou estes */
-.modalFooter .button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-}
-.modalFooter .button:disabled { background-color: #ccc; cursor: not-allowed; }
-.modalFooter .secondaryButton {
-  padding: 10px 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f8f9fa;
-  color: #333;
-  cursor: pointer;
-  font-size: 1rem;
-}
-.modalFooter .secondaryButton:disabled { opacity: 0.6; cursor: not-allowed; }
-
-.errorText { /* Erro local do formulário */
-    color: #dc3545;
-    font-size: 0.85em;
-    margin-top: -10px;
+  gap: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 5px solid var(--dourado-zayon);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-/* ======================================================= */
-/* [V51] ESTILOS DE NOTIFICAÇÃO (Mova se for global)      */
-/* ======================================================= */
-.notification {
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.95em;
-    border: 1px solid transparent;
+.timeInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--preto-zayon);
+  border-right: 1px solid #ddd;
+  padding-right: 20px;
 }
-.notificationSuccess {
-    background-color: #e6f7ec;
-    border-color: #b7e1c8;
-    color: #0f5132;
-}
-.notificationError {
-    background-color: #f8d7da;
-    border-color: #f5c2c7;
-    color: #842029;
-}
-.notificationClose {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    line-height: 1;
-    color: inherit;
-    cursor: pointer;
-    opacity: 0.7;
-    padding: 0 5px;
-}
-.notificationClose:hover { opacity: 1; }
 
-/* ... (Seus estilos existentes para .dashboardContainer, .sideMenu, etc.) ... */
-/* ... (Estilos do calendário: .calendarGrid, .dayCell, .monthView, etc.) ... */
+.details h4 {
+  margin: 0 0 5px 0;
+  color: var(--dourado-zayon);
+}
 
-/* [V1000] Estilos para cartão de agendamento clicável */
+.details p {
+  margin: 0;
+  color: #555;
+}
+
 .clickableCard {
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    position: relative;
-}
-.clickableCard:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
 }
 
-/* [V1000] Destaque para consulta concluída (prontuário preenchido) */
+.clickableCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .concluido {
-    border-left: 4px solid #198754; /* Verde (Bootstrap success) */
-    background-color: #f6fff9;
-}
-.appointmentItemMonth.concluido {
-    background-color: #d1e7dd; /* Verde mais escuro para o mês */
-    border-color: #198754;
-    color: #0f5132;
+  border-left: 4px solid #198754;
+  background-color: #f6fff9;
 }
 
-
-/* [V1000] Dica visual para adicionar prontuário */
-.addObservationHint {
-    position: absolute;
-    bottom: 5px;
-    right: 8px;
-    font-size: 0.75em;
-    color: #007bff;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-}
-.clickableCard:hover .addObservationHint {
-    opacity: 1;
-}
-
-/* ======================================================= */
-/* [V1000] ESTILOS PARA O MODAL (ObservationForm)            */
-/* ======================================================= */
+/* --- MODAL --- */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -384,6 +617,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 15px;
 }
 
 .modalContent {
@@ -395,7 +629,7 @@
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .modalHeader {
@@ -404,32 +638,16 @@
   margin-bottom: 20px;
   position: relative;
 }
-.modalHeader h3 { margin-top: 0; color: #333; }
-.modalHeader p { margin: 5px 0; font-size: 0.9em; color: #555; }
 
 .modalCloseButton {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 0;
+  right: 0;
   background: none;
   border: none;
   font-size: 1.8rem;
-  line-height: 1;
   color: #888;
   cursor: pointer;
-}
-.modalCloseButton:hover { color: #333; }
-
-/* [V1000] Garante que 'form' dentro do modal seja estilizado */
-.modalContent .form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-.modalContent .form label {
-  font-weight: 600;
-  margin-bottom: -10px;
-  color: #444;
 }
 
 .textarea {
@@ -440,21 +658,14 @@
   font-size: 1rem;
   resize: vertical;
   min-height: 60px;
-  box-sizing: border-box; /* Garante padding correto */
+  box-sizing: border-box;
 }
 
 .inputFile {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-}
-.inputFile:hover { background-color: #f8f8f8; }
-
-.fileName {
-    font-size: 0.85em;
-    color: #555;
-    margin-top: -5px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
 }
 
 .modalFooter {
@@ -465,68 +676,341 @@
   border-top: 1px solid #eee;
   margin-top: 20px;
 }
-/* Use seus botões globais ou estes */
-.modalFooter .button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-}
-.modalFooter .button:disabled { background-color: #ccc; cursor: not-allowed; }
-.modalFooter .secondaryButton {
+
+.secondaryButton {
   padding: 10px 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f8f9fa;
   color: #333;
   cursor: pointer;
-  font-size: 1rem;
-}
-.modalFooter .secondaryButton:disabled { opacity: 0.6; cursor: not-allowed; }
-
-.errorText { /* Erro local do formulário */
-    color: #dc3545;
-    font-size: 0.85em;
-    margin-top: -10px;
-    font-weight: 600;
 }
 
-/* ======================================================= */
-/* [V1000] ESTILOS DE NOTIFICAÇÃO (Mova se for global)      */
-/* ======================================================= */
+.errorText {
+  color: #dc3545;
+  font-size: 0.85em;
+  margin-top: -10px;
+}
+
 .notification {
-    padding: 15px 20px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid transparent;
+}
+
+.notificationSuccess {
+  background-color: #e6f7ec;
+  border-color: #b7e1c8;
+  color: #0f5132;
+}
+
+.notificationError {
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+  color: #842029;
+}
+
+.notificationClose {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.noItems {
+  padding: 40px;
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+/* --- ACESSIBILIDADE (FOCUS) --- */
+.menuButton:focus-visible,
+.button:focus-visible,
+.iconButton:focus-visible,
+.headerNav button:focus-visible,
+.viewModeButtons button:focus-visible,
+.tabsContainer button:focus-visible,
+.input:focus-visible {
+  outline: 2px solid var(--dourado-zayon);
+  outline-offset: 2px;
+}
+
+.input:focus,
+.inputTime:focus,
+.searchInput:focus {
+  border-color: var(--dourado-zayon);
+  box-shadow: 0 0 0 3px rgba(141, 101, 23, 0.15);
+  outline: none;
+}
+
+/* =================================================== */
+/* --- CORREÇÃO DEFINITIVA: ALTO CONTRASTE (V4.2) --- */
+/* =================================================== */
+
+body.high-contrast .sideMenu {
+  border: 2px solid var(--dourado-zayon);
+  background-color: var(--branco-zayon); /* Preto */
+}
+
+body.high-contrast .contentArea {
+  border: 2px solid var(--dourado-zayon);
+  box-shadow: none;
+  background-color: var(--branco-zayon); /* Preto */
+}
+
+body.high-contrast .pageHeader h2 {
+  color: var(--dourado-zayon); /* Amarelo */
+}
+
+body.high-contrast .searchInput {
+  background-color: var(--branco-zayon);
+  color: var(--preto-zayon);
+  border: 2px solid var(--preto-zayon);
+}
+
+body.high-contrast .searchInput:focus {
+  border-color: var(--dourado-zayon);
+}
+
+body.high-contrast .iconButton {
+  background-color: var(--preto-zayon);
+  border: 2px solid var(--dourado-zayon);
+  color: var(--dourado-zayon);
+}
+
+body.high-contrast .iconButton:hover {
+  background-color: var(--dourado-zayon);
+  color: var(--preto-zayon);
+}
+
+body.high-contrast .userTable th {
+  background-color: var(--preto-zayon); /* Branco */
+  color: var(--branco-zayon); /* Preto */
+  border-bottom: 2px solid var(--dourado-zayon);
+}
+
+body.high-contrast .userTable td {
+  border-bottom: 1px solid var(--dourado-zayon);
+  color: var(--preto-zayon); /* Branco */
+}
+
+/* --- CORREÇÃO ESPECÍFICA DO FORMULÁRIO DE AGENDA NO MODO CONTRASTE --- */
+body.high-contrast .weekdaysConfig {
+  background-color: #000000 !important; /* Fundo Preto Absoluto */
+  border: 2px solid var(--dourado-zayon);
+}
+
+/* Corrigindo cor do título (Legend) no Alto Contraste */
+body.high-contrast .weekdaysConfig legend,
+body.high-contrast .weekdaysConfig legend h4 {
+  color: var(--dourado-zayon) !important; /* Título Amarelo */
+}
+
+/* Força o fundo preto e texto branco nos inputs de hora */
+body.high-contrast .inputTime {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid var(--dourado-zayon) !important;
+}
+
+/* Estilo para input desabilitado no modo contraste */
+body.high-contrast .inputTime:disabled {
+  background-color: #333 !important;
+  color: #aaa !important;
+  border-color: #555 !important;
+}
+
+/* Força o fundo preto e texto branco nas linhas de dias da semana */
+body.high-contrast .weekdayRow {
+  background-color: #000000 !important;
+  border-bottom: 1px solid #333;
+  color: #ffffff !important;
+}
+
+/* Destaque para a linha habilitada */
+body.high-contrast .weekdayRow.enabled {
+  background-color: #111 !important;
+  border: 1px solid var(--dourado-zayon);
+}
+
+/* Texto do Checkbox (Domingo, Segunda...) */
+body.high-contrast .weekdayCheckboxLabel {
+  color: #ffffff !important;
+}
+
+/* Texto "às" */
+body.high-contrast .weekdayRowBottom {
+  color: #ffffff !important;
+}
+
+/* Botões e Abas no Alto Contraste */
+body.high-contrast .menuButton.active {
+  background-color: var(--dourado-zayon);
+  color: #000000;
+}
+
+body.high-contrast .menuButton {
+  color: var(--preto-zayon); /* Branco */
+}
+
+body.high-contrast .button {
+  background-image: none;
+  background-color: var(--dourado-zayon);
+  color: #000000;
+  border: 2px solid var(--dourado-zayon);
+}
+
+body.high-contrast .tabButtons button {
+  color: var(--preto-zayon); /* Branco */
+}
+
+body.high-contrast .tabButtons button.active {
+  color: var(--dourado-zayon);
+  border-bottom-color: var(--dourado-zayon);
+}
+
+body.high-contrast .input {
+  background-color: var(--branco-zayon);
+  color: var(--preto-zayon);
+  border: 1px solid var(--dourado-zayon);
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 1024px) {
+  .dashboardContainer {
+    flex-direction: column;
+    padding: 15px;
+    gap: 15px;
+  }
+  .sideMenu {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  .nav {
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    padding-bottom: 10px;
+  }
+  .menuButton {
+    width: auto;
+    flex-shrink: 0;
+    padding: 10px 15px;
+  }
+  .contentArea {
+    padding: 20px 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .calendarHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+  .headerNav {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .headerNav h2 {
+    width: 100%;
+    text-align: center;
+    order: -1;
+  }
+  .viewModeButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .monthView, .weekView {
+    grid-template-columns: 1fr;
+  }
+  .dayCell {
+    min-height: 80px;
+  }
+  .appointmentCard {
+    flex-direction: column;
+  }
+  .timeInfo {
+    flex-direction: row;
+    gap: 10px;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  .contentArea {
+    padding: 20px;
+  }
+  .userTable thead {
+    display: none;
+  }
+  .userTable, .userTable tbody, .userTable tr, .userTable td {
+    display: block;
+    width: 100%;
+  }
+  .userTable tr {
     margin-bottom: 20px;
-    border-radius: 5px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+  }
+  .userTable td {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.95em;
-    border: 1px solid transparent;
-    z-index: 1001; /* Acima do modal overlay */
-    position: relative; /* Garante z-index */
+    text-align: right;
+    padding: 15px;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .userTable td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #888;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+  body.high-contrast .userTable tr {
+    background-color: var(--branco-zayon);
+    border: 1px solid var(--dourado-zayon);
+  }
+  body.high-contrast .userTable td::before {
+    color: var(--dourado-zayon);
+  }
+  .weekdayRow {
+    grid-template-columns: 1fr;
+  }
+  .weekdayRowBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Correção Tabela Mobile Actions */
+  .actionsCell {
+    width: 100%;
+    min-width: auto;
+    max-width: none;
+    justify-content: flex-end; 
+    margin-top: 10px;
+  }
+  
+  .iconButton {
+    transition: none;
+    width: 40px !important;
+  }
+  .iconButton:hover {
+    width: 40px !important;
+  }
+  .iconButton span {
+    display: none;
+  }
 }
-.notificationSuccess {
-    background-color: #e6f7ec;
-    border-color: #b7e1c8;
-    color: #0f5132;
-}
-.notificationError {
-    background-color: #f8d7da;
-    border-color: #f5c2c7;
-    color: #842029;
-}
-.notificationClose {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    line-height: 1;
-    color: inherit;
-    cursor: pointer;
-    opacity: 0.7;
-    padding: 0 5px;
-}
-.notificationClose:hover { opacity: 1; }

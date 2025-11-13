@@ -1,39 +1,29 @@
-/* --- CORREÇÃO AQUI --- */
-/* (Removemos o "e" que estava antes do .footer) */
 .footer {
-  background-color: var(--preto-zayon);
-  color: var(--branco-zayon);
+  background-color: var(--cor-fundo-footer);
+  color: var(--cor-texto-footer);
   padding: 60px 20px 40px 20px;
   margin-top: 60px;
+}
+
+body.high-contrast .footer {
+  border-top: 2px solid var(--dourado-zayon);
 }
 
 .content {
   max-width: 1200px;
   margin: 0 auto;
-}
-
-/* ESTILOS DA GRADE PRINCIPAL (Info | Mapa) */
-.footerMain {
-  display: grid;
-  /* Layout principal: 
-     1ª coluna (info) ocupa 60%
-     2ª coluna (mapa) ocupa 40%
-  */
-  grid-template-columns: 60% auto; /* --- MUDANÇA AQUI --- */
-  gap: 40px; /* Espaço entre a info e o mapa */
-  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   text-align: left;
 }
 
-/* --- MUDANÇA AQUI: 3 COLUNAS DE INFO --- */
 .footerInfo {
   display: grid;
-  /* Divide a seção de info em 3 colunas iguais */
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 25px; /* Espaço entre os blocos "Localização", "Contato", etc. */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
 }
 
-/* Bloco de Informação (Endereço, Contato, etc.) */
 .infoBlock {
   font-size: 0.95rem;
 }
@@ -42,86 +32,96 @@
   margin: 5px 0 0 0;
   line-height: 1.6;
   opacity: 0.9;
+  color: var(--cor-texto-footer);
 }
 
-/* E-mail e Telefone com ícones */
+body.high-contrast .infoBlock p {
+  opacity: 1;
+}
+
 .infoBlock p[aria-label*="Email"],
 .infoBlock p[aria-label*="WhatsApp"] {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-/* Título de cada bloco */
 .footerTitle {
-  color: var(--dourado-zayon, #c9a96a); 
+  color: var(--dourado-zayon);
   font-size: 1.3rem;
   font-weight: 500;
   margin: 0 0 10px 0;
 }
 
-/* Bloco Específico dos Dentistas */
 .dentistInfo {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Espaço entre os dois dentistas */
+  gap: 15px;
 }
 .dentistInfo p {
-  margin: 0; 
+  margin: 0;
   line-height: 1.5;
 }
 .dentistInfo strong {
-  color: #fff; 
+  color: var(--cor-texto-footer);
   font-weight: 500;
 }
 
-/* --- CORREÇÃO AQUI: MAPA MAIOR --- */
-/* (Consolidamos as regras e corrigimos o typo "footerMap") */
 .footerMap {
   width: 100%;
-  /* Agora o mapa terá 450px de altura */
-  height: 400px; 
+  height: 400px;
   border-radius: 8px;
-  overflow: hidden; 
-  margin-top: 1.5rem;
-
+  overflow: hidden;
 }
 
-/* Garante que o iframe ocupe 100% da altura do container */
-.footerMap iframe { 
+body.high-contrast .footerMap {
+  border: 2px solid var(--dourado-zayon);
+}
+
+.footerMap iframe {
   width: 100%;
   height: 100%;
-  border: 0; /* Remove a borda padrão do iframe */
+  border: 0;
 }
 
-/* --- Estilos do Copyright --- */
+body.high-contrast .footerMap iframe {
+  filter: grayscale(1) invert(1) contrast(1.5);
+}
+
+.footerMap iframe:focus-visible {
+  outline: 2px solid var(--dourado-zayon);
+  outline-offset: 2px;
+}
+
 .copyright {
   font-size: 0.9em;
   opacity: 0.7;
-  text-align: center; 
+  text-align: center;
   padding-top: 30px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--cor-texto-footer);
 }
 
+body.high-contrast .copyright {
+  border-top: 2px solid var(--dourado-zayon);
+  opacity: 1;
+}
 
-/* --- RESPONSIVIDADE ATUALIZADA --- */
-@media (max-width: 800px) {
-  
-  /* No mobile, o layout principal (Info e Mapa) empilha */
-  .footerMain {
-    grid-template-columns: 1fr; /* 1 coluna */
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 15px 20px 15px;
+  }
+
+  .content {
+    gap: 30px;
+  }
+
+  .footerInfo {
+    grid-template-columns: 1fr;
     gap: 40px;
   }
 
-  /* --- MUDANÇA AQUI --- */
-  /* As 3 colunas de info também empilham */
-  .footerInfo {
-    grid-template-columns: 1fr; /* 1 coluna */
-    gap: 40px; /* Um espaço maior no mobile */
-  }
-
-  /* Altura do mapa no mobile */
   .footerMap {
-    height: 400px; 
+    height: 300px;
   }
 }

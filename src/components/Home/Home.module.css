@@ -1,9 +1,4 @@
-/* ============================================= */
-/* --- Hero Section (Cabeçalho com Imagem) --- */
-/* ============================================= */
-
 .main {
-  /* O padding foi movido para as seções internas para que o hero e o footer possam ocupar a largura total */
   padding: 0;
 }
 
@@ -14,18 +9,13 @@
   align-items: center;
   text-align: center;
   padding: 100px 20px;
-  min-height: 70vh; /* Ocupa uma boa parte da tela inicial */
-  color: var(--branco-zayon);
-  position: relative; /* Essencial para o posicionamento do overlay */
-
-  /* --- Imagem de Fundo --- */
-  background-image: url('../../assets/HorizontalImg.png'); /* Caminho correto da imagem */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  min-height: 70vh;
+  color:white;
+  position: relative;
+  background-color: var(--preto-zayon);
+  overflow: hidden;
 }
 
-/* Overlay escuro para garantir a legibilidade do texto sobre a imagem */
 .hero::before {
   content: '';
   position: absolute;
@@ -33,16 +23,51 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Overlay um pouco mais escuro */
+  background-image: url('../../assets/HorizontalImg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   z-index: 1;
+  filter: brightness(0.5);
+  transition: opacity 0.3s ease;
 }
 
-/* Garante que o texto fique por cima do overlay */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+body.high-contrast .hero {
+  background-color: var(--branco-zayon);
+}
+
+body.high-contrast .hero::before,
+body.high-contrast .hero::after {
+  opacity: 0;
+  display: none;
+}
+
 .title,
 .description {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+body.high-contrast .title {
+  color: var(--dourado-zayon);
+  text-shadow: none;
+}
+body.high-contrast .description {
+  color: var(--preto-zayon);
+  text-shadow: none;
 }
 
 .title {
@@ -59,25 +84,18 @@
   font-weight: 300;
 }
 
-
-/* ============================================= */
-/* --- [NOVO] Seção Sobre (2 Colunas) --- */
-/* ============================================= */
-
 .sobreSection {
   padding: 80px 20px;
-  /* Cor de fundo alternada para criar contraste */
-  background-color: #f9f9f9; 
+  background-color: var(--cinza-claro);
 }
 
 .sobreGrid {
   display: grid;
-  /* 2 colunas: 1fr (texto) e 1fr (imagem) */
-  grid-template-columns: 1fr 1fr; 
-  gap: 50px; /* Espaço entre o texto e a imagem */
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
   max-width: 1200px;
   margin: 0 auto;
-  align-items: center; /* Centraliza verticalmente */
+  align-items: center;
 }
 
 .sobreTexto {
@@ -94,29 +112,33 @@
 
 .sobreDescription {
   font-size: 1.1em;
-  color: #555;
+  color: var(--preto-zayon);
   line-height: 1.7;
   margin-bottom: 20px;
 }
 
 .sobreImagemContainer {
   width: 100%;
-  height: 400px; /* Altura fixa para a imagem */
+  height: 400px;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
+body.high-contrast .sobreImagemContainer {
+  box-shadow: none;
+  border: 2px solid var(--dourado-zayon);
+}
+
 .sobreImagem {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Garante que a imagem preencha */
+  object-fit: cover;
 }
 
-
-/* ============================================= */
-/* --- Seção de Serviços --- */
-/* ============================================= */
+body.high-contrast .sobreImagem {
+  filter: none;
+}
 
 .servicosSection {
   padding: 80px 20px;
@@ -146,11 +168,22 @@
   overflow: hidden;
   text-align: left;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 1px solid transparent;
+}
+
+body.high-contrast .servicoCard {
+  box-shadow: none;
+  border: 2px solid var(--dourado-zayon);
+  background-color: var(--branco-zayon);
 }
 
 .servicoCard:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+body.high-contrast .servicoCard:hover {
+  transform: none;
+  box-shadow: 0 0 10px var(--dourado-zayon);
 }
 
 .imageContainer {
@@ -163,7 +196,11 @@
 .servicoImagem {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+  object-fit: cover;
+}
+
+body.high-contrast .servicoImagem {
+  filter: none;
 }
 
 .cardTitle {
@@ -176,12 +213,8 @@
 .cardDescription {
   padding: 0 20px 20px;
   line-height: 1.6;
-  color: #555;
+  color: var(--preto-zayon);
 }
-
-/* ============================================= */
-/* --- Responsividade para Celular --- */
-/* ============================================= */
 
 @media (max-width: 768px) {
   .hero {
@@ -197,31 +230,27 @@
     font-size: 1.2em;
   }
 
-  /* --- [NOVO] Responsividade da Seção Sobre --- */
   .sobreGrid {
-    grid-template-columns: 1fr; /* Empilha as colunas */
+    grid-template-columns: 1fr;
     gap: 30px;
   }
 
   .sobreTitle {
     font-size: 1.8em;
   }
-  
+
   .sobreDescription {
     font-size: 1em;
   }
 
   .sobreImagemContainer {
-    height: 300px; /* Altura menor no mobile */
-    /* Garante que a imagem venha depois do texto */
-    grid-row: 2; 
+    height: 300px;
+    grid-row: 2;
   }
-  
+
   .sobreTexto {
     grid-row: 1;
   }
-  /* --- [FIM DA NOVA RESPONSIVIDADE] --- */
-
 
   .sectionTitle {
     font-size: 1.8em;

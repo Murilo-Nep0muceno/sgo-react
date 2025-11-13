@@ -1,302 +1,277 @@
-/* src/components/AdminDashboard/AdminDashboard.module.css */
-
-/* ========================================= */
-/* --- 1. ESTRUTURA BASE DO DASHBOARD --- */
-/* ========================================= */
 .dashboardContainer {
-    display: flex;
-    gap: 30px;
-    padding: 30px;
-    background-color: #f9f9f9;
-    min-height: calc(100vh - 155px);
+  display: flex;
+  gap: 30px;
+  padding: 30px;
+  background-color: #f9f9f9;
+  min-height: calc(100vh - 155px);
 }
 
 .sideMenu {
-    width: 250px;
-    flex-shrink: 0;
-    background-color: var(--branco-zayon);
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    padding: 20px;
-    height: fit-content;
+  width: 250px;
+  flex-shrink: 0;
+  background-color: var(--branco-zayon);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  height: fit-content;
 }
 
 .welcomeMessage {
-    text-align: center;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
 }
 
 .welcomeMessage p {
-    margin: 0;
-    color: #555;
+  margin: 0;
+  color: #555;
 }
 
 .welcomeMessage strong {
-    font-size: 1.2rem;
-    color: var(--dourado-zayon);
+  font-size: 1.2rem;
+  color: var(--dourado-zayon);
 }
 
 .nav {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .menuButton {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    background-color: transparent;
-    text-align: left;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--preto-zayon);
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--preto-zayon);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
 .menuButton:hover {
-    background-color: rgba(141, 101, 23, 0.1);
-    color: var(--dourado-zayon);
+  background-color: rgba(141, 101, 23, 0.1);
+  color: var(--dourado-zayon);
 }
 
 .menuButton.active {
-    background-color: var(--dourado-zayon);
-    color: var(--branco-zayon);
-    font-weight: bold;
+  background-color: var(--dourado-zayon);
+  color: var(--branco-zayon);
+  font-weight: bold;
 }
 
 .contentArea {
-    flex-grow: 1;
-    background-color: var(--branco-zayon);
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    padding: 40px;
+  flex-grow: 1;
+  background-color: var(--branco-zayon);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 40px;
 }
 
-/* ========================================= */
-/* --- 2. CABEÇALHO E FILTROS --- */
-/* ========================================= */
 .pageHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 15px;
-    margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
 }
 
-.pageHeader h3 {
-    margin: 0;
-    color: var(--preto-zayon);
-    font-size: 1.8rem;
+.pageHeader h2 {
+  margin: 0;
+  color: var(--preto-zayon);
+  font-size: 1.8rem;
 }
 
 .filterContainer {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .searchInput {
-    padding: 12px 15px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    min-width: 300px;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 300px;
+  box-sizing: border-box;
 }
 
-/* ========================================= */
-/* --- 3. TABELA DE USUÁRIOS --- */
-/* ========================================= */
 .tableContainer {
-    overflow-x: auto;
+  overflow-x: auto;
 }
 
 .userTable {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .userTable th,
 .userTable td {
-    padding: 15px;
-    border-bottom: 1px solid #e9ecef;
-    text-align: left;
-    vertical-align: middle;
+  padding: 15px;
+  border-bottom: 1px solid #e9ecef;
+  text-align: left;
+  vertical-align: middle;
 }
 
 .userTable th {
-    background-color: #f8f9fa;
-    font-weight: 600;
-    color: #495057;
-    font-size: 0.9rem;
-    text-transform: uppercase;
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.9rem;
+  text-transform: uppercase;
 }
 
 .userTable tbody tr:hover {
-    background-color: #f1f3f5;
+  background-color: #f1f3f5;
 }
 
 .actionsCell {
-    display: flex;
-    gap: 10px;
-    align-items: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .actionButton {
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 500;
-    color: white;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  color: white;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
 }
 
 .editButton {
-    background-color: #3498db;
+  background-color: #3498db;
 }
 
 .editButton:hover {
-    background-color: #2980b9;
+  background-color: #2980b9;
 }
 
 .deleteButton {
-    background-color: #e74c3c;
+  background-color: #e74c3c;
 }
 
 .deleteButton:hover {
-    background-color: #c0392b;
+  background-color: #c0392b;
 }
 
 .actionButton:disabled {
-    background-color: #bdc3c7;
-    cursor: not-allowed;
+  background-color: #bdc3c7;
+  cursor: not-allowed;
 }
 
 .disabledRow {
-    opacity: 0.5;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
-/* ========================================= */
-/* --- 4. FORMULÁRIOS (CRIAÇÃO E EDIÇÃO) --- */
-/* ========================================= */
 .backButton {
-    background: none;
-    border: none;
-    color: var(--dourado-zayon);
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 20px;
-    padding: 0;
+  background: none;
+  border: none;
+  color: var(--dourado-zayon);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding: 0;
 }
 
-/* Abas de navegação para tipo de usuário */
 .tabsContainer {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 25px;
-    border-bottom: 1px solid #dee2e6;
+  display: flex;
+  gap: 5px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #dee2e6;
 }
 
 .tabsContainer button {
-    padding: 12px 25px; /* Aumenta o padding */
-    border: none;
-    background-color: transparent;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    border-bottom: 3px solid transparent; /* Borda sutil */
-    color: #495057; /* Cor de texto padrão */
-    transition: all 0.2s ease;
+  padding: 12px 25px;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  color: #495057;
+  transition: all 0.2s ease;
 }
 
 .tabsContainer button.activeTab {
-    color: var(--dourado-zayon);
-    border-bottom-color: var(--dourado-zayon); /* Borda ativa na cor do tema */
+  color: var(--dourado-zayon);
+  border-bottom-color: var(--dourado-zayon);
 }
 
-/* Container que envolve o formulário */
 .formWrapper {
-    background-color: #fdfdfd;
-    padding: 30px;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-    max-width: 500px; /* Define uma largura máxima */
-    margin: 0 auto; /* Centraliza o wrapper */
+  background-color: #fdfdfd;
+  padding: 30px;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-/* O formulário em si */
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .form label {
-    font-weight: 500;
-    margin-bottom: -5px;
-    color: #333;
+  font-weight: 500;
+  margin-bottom: -5px;
+  color: #333;
 }
 
 .form input {
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 .button {
-    background-image: linear-gradient(to right, #a17c34, #8d6517);
-    color: var(--branco-zayon);
-    border: none;
-    padding: 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 1.1rem;
-    margin-top: 10px;
-    transition: transform 0.2s ease;
+  background-image: linear-gradient(to right, #a17c34, #8d6517);
+  color: var(--branco-zayon);
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  transition: transform 0.2s ease;
 }
 
 .button:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
-/* ========================================= */
-/* --- 5. MENSAGENS DE FEEDBACK --- */
-/* ========================================= */
 .success,
 .error {
-    padding: 15px;
-    border-radius: 6px;
-    text-align: center;
-    font-weight: 500;
-    margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 20px;
 }
 
 .success {
-    color: #0f5132;
-    background-color: #d1e7dd;
+  color: #0f5132;
+  background-color: #d1e7dd;
 }
 
 .error {
-    color: #842029;
-    background-color: #f8d7da;
+  color: #842029;
+  background-color: #f8d7da;
 }
-/* ... (Todo o seu CSS de 1 a 5) ... */
-
-
-/* ========================================= */
-/* --- 6. [V2] MODAL DE CONFIRMAÇÃO --- */
-/* ========================================= */
 
 .modalOverlay {
   position: fixed;
@@ -309,6 +284,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 15px;
 }
 
 .modalContent {
@@ -316,9 +292,10 @@
   padding: 25px;
   border-radius: 8px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  width: 100%;
+  width: 90%;
   max-width: 450px;
   z-index: 1001;
+  box-sizing: border-box;
 }
 
 .modalHeader {
@@ -330,7 +307,7 @@
   margin-bottom: 20px;
 }
 
-.modalHeader h4 {
+.modalHeader h3 {
   margin: 0;
   font-size: 1.3rem;
   color: var(--preto-zayon);
@@ -339,21 +316,35 @@
 .modalCloseButton {
   background: none;
   border: none;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 300;
   color: #aaa;
   cursor: pointer;
   line-height: 1;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.modalCloseButton:hover {
+  background-color: #f0f0f0;
+  color: #333;
 }
 
 .modalBody {
   margin-bottom: 25px;
 }
 
+.modalBody label,
 .modalBody p {
   font-size: 1rem;
   color: #333;
   line-height: 1.5;
+  display: block;
+  margin-bottom: 15px;
 }
 
 .modalInput {
@@ -362,8 +353,7 @@
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 6px;
-  margin-top: 15px;
-  box-sizing: border-box; /* Garante que o padding não quebre o layout */
+  box-sizing: border-box;
 }
 
 .modalFooter {
@@ -372,33 +362,170 @@
   gap: 15px;
 }
 
-/* [V2] Reutilizando a classe .actionButton que você já tinha */
 .modalFooter .actionButton {
   padding: 10px 20px;
 }
 
 .cancelButton {
-  background-color: #6c757d; /* Cinza */
+  background-color: #6c757d;
 }
 .cancelButton:hover {
   background-color: #5a6268;
 }
 
-/* [V2.1] ADICIONE ESTAS NOVAS REGRAS ABAIXO */
-
 .confirmButton {
-  background-color: #a17c34; /* <-- A cor que você pediu! */
+  background-color: #a17c34;
   color: var(--branco-zayon);
   transition: background-color 0.2s ease;
 }
 
 .confirmButton:hover {
-  background-color: #8d6517; /* Um pouco mais escuro no hover */
+  background-color: #8d6517;
 }
 
-/* Garante que o estilo 'disabled' se aplique a ele também */
 .confirmButton:disabled {
   background-color: #bdc3c7;
   color: #7f8c8d;
   cursor: not-allowed;
+}
+
+.menuButton:focus-visible,
+.actionButton:focus-visible,
+.backButton:focus-visible,
+.tabsContainer button:focus-visible,
+.modalCloseButton:focus-visible,
+.modalFooter .actionButton:focus-visible {
+  outline: 2px solid var(--dourado-zayon);
+  outline-offset: 2px;
+}
+
+.searchInput:focus,
+.form input:focus,
+.modalInput:focus {
+  border-color: var(--dourado-zayon);
+  box-shadow: 0 0 0 2px rgba(141, 101, 23, 0.2);
+  outline: none;
+}
+
+.searchInput:focus-visible,
+.form input:focus-visible,
+.modalInput:focus-visible {
+  outline: 2px solid var(--dourado-zayon);
+  outline-offset: 1px;
+  box-shadow: none;
+}
+
+@media (max-width: 1024px) {
+  .dashboardContainer {
+    flex-direction: column;
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .sideMenu {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  
+  .nav {
+     flex-direction: row;
+     overflow-x: auto;
+     white-space: nowrap;
+     justify-content: flex-start;
+     padding-bottom: 10px;
+  }
+  
+  .menuButton {
+     width: auto;
+     flex-shrink: 0;
+     padding: 10px 15px;
+  }
+
+  .contentArea {
+    padding: 20px 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pageHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .filterContainer {
+    width: 100%;
+  }
+
+  .searchInput {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .tableContainer {
+    overflow-x: hidden;
+  }
+
+  .userTable {
+    border: none;
+  }
+
+  .userTable thead {
+    display: none;
+  }
+
+  .userTable tr {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .userTable td {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: right;
+    padding: 10px 5px;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+    padding-left: 50%;
+    min-height: 40px;
+  }
+  
+  .userTable td:last-child {
+    border-bottom: none;
+  }
+
+  .userTable td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: calc(50% - 20px);
+    padding-right: 10px;
+    font-weight: bold;
+    text-align: left;
+    color: #333;
+  }
+
+  .actionsCell {
+    justify-content: flex-end;
+    gap: 5px;
+  }
+  
+  .actionButton {
+    padding: 6px 10px;
+  }
+  
+  .formWrapper {
+    padding: 20px 15px;
+  }
+
+  .tabsContainer {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }

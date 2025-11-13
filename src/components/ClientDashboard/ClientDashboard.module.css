@@ -13,6 +13,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   padding: 20px;
+  height: fit-content;
 }
 
 .welcomeMessage {
@@ -57,7 +58,7 @@
   color: var(--dourado-zayon);
 }
 
-.active {
+.menuButton.active {
   background-color: var(--dourado-zayon);
   color: var(--branco-zayon);
   font-weight: bold;
@@ -72,132 +73,201 @@
   padding: 40px;
 }
 
-/* --- Estilos dos Cards de Agendamento --- */
-.cardAgendamento {
-  background-color: #fdfdfd;
-  border-radius: 8px;
-  padding: 20px;
-  border-left: 5px solid var(--dourado-zayon);
-  margin-bottom: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+.contentTitle {
+  font-size: 1.8rem;
+  color: var(--preto-zayon);
+  margin-top: 0;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
 }
 
-.cardAgendamento p {
-  margin: 8px 0;
-  font-size: 1.1em;
-}
-
-/* Adicionar ao final de SecretaryDashboard.module.css ou um arquivo CSS global */
-
-/* Estilos para Status */
-.status-agendado {
-  color: #007bff; /* Azul */
-  font-weight: bold;
-}
-
-.status-concluído {
-  color: #28a745; /* Verde */
-  font-weight: bold;
-}
-
-.status-cancelado {
-  color: #dc3545; /* Vermelho */
-  font-weight: bold;
-  text-decoration: line-through; /* Tacha o texto */
-}
-
-/* Estilo para a linha inteira quando cancelado (opcional) */
-.cancelledRow td {
-  opacity: 0.6;
-  text-decoration: line-through;
-}
-
-.cancelledRow button {
-    cursor: not-allowed;
-}
-
-/* Para ClientDashboard.module.css (se não reutilizar o da secretária) */
 .cardAgendamento {
   background-color: #f8f9fa;
   border: 1px solid #dee2e6;
   border-left-width: 5px;
-  border-left-color: #007bff; /* Azul padrão */
-  padding: 15px;
+  border-left-color: #007bff;
+  padding: 20px;
   margin-bottom: 15px;
   border-radius: 5px;
+  color: #333; /* Cor padrão do texto */
 }
 
 .cardAgendamento.pastAppointment {
-    border-left-color: #6c757d; /* Cinza para histórico */
-    opacity: 0.8;
+  border-left-color: #6c757d;
+  opacity: 0.8;
 }
 
 .cardAgendamento p {
-    margin: 5px 0;
+  margin: 5px 0;
 }
 
-/* Reutiliza botões ou define novos */
+/* --- CORREÇÃO: ESTILOS DOS CARDS NO ALTO CONTRASTE --- */
+body.high-contrast .cardAgendamento {
+  background-color: var(--branco-zayon); /* Vira Preto */
+  color: var(--preto-zayon); /* Vira Branco */
+  border: 2px solid var(--dourado-zayon); /* Borda Amarela */
+  opacity: 1; /* Remove transparência para garantir leitura */
+}
+
+/* Ajuste para o texto dentro do card no alto contraste */
+body.high-contrast .cardAgendamento p,
+body.high-contrast .cardAgendamento strong {
+  color: var(--preto-zayon); /* Vira Branco */
+}
+
+/* Destaque para o rótulo (ex: Profissional:) no alto contraste */
+body.high-contrast .cardAgendamento strong {
+  color: var(--dourado-zayon); /* Amarelo */
+}
+/* ----------------------------------------------------- */
+
+.cardActions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .actionButton {
-  padding: 6px 12px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  transition: background-color 0.2s, color 0.2s;
-  margin-top: 10px; /* Espaço acima do botão */
+  transition: all 0.2s ease;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goldenButton {
+  background-image: linear-gradient(to right, #a17c34, #8d6517);
+  color: var(--branco-zayon);
+  box-shadow: 0 4px 10px rgba(141, 101, 23, 0.2);
+}
+
+.goldenButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(141, 101, 23, 0.3);
+}
+
+.goldenButton:disabled {
+  background-image: none;
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .deleteButton {
-  background-color: #dc3545; /* Vermelho */
-  color: white;
+  background-color: #dc3545;
 }
 
 .deleteButton:hover {
   background-color: #c82333;
 }
 
-/* Status no Card do Cliente */
-.status-agendado { /* Já definido acima */ }
-.status-concluído { /* Já definido acima */ }
-.status-cancelado { /* Já definido acima */ }
-/* ... (Seus estilos existentes para .cardAgendamento, .pastAppointment, etc.) ... */
+.deleteButton:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
 
-/* ======================================================= */
-/* [V52] ESTILOS DE NOTIFICAÇÃO                            */
-/* ======================================================= */
+.viewButton {
+  background-color: #007bff;
+}
+
+.viewButton:hover {
+  background-color: #0056b3;
+}
+
+.secondaryButton {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f8f9fa;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.secondaryButton:hover {
+  background-color: #e2e6ea;
+}
+
+.secondaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.status-agendado {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.status-concluído {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.status-cancelado {
+  color: #dc3545;
+  font-weight: bold;
+  text-decoration: line-through;
+}
+
+/* Correção da cor do status no alto contraste */
+body.high-contrast .status-cancelado {
+  color: #FF5555; /* Vermelho claro para ler no fundo preto */
+  text-decoration: none; /* Remove risco para facilitar leitura */
+}
+
+body.high-contrast .status-concluído {
+  color: #55FF55; /* Verde claro para ler no fundo preto */
+}
+
+body.high-contrast .status-agendado {
+  color: #5555FF; /* Azul claro para ler no fundo preto */
+}
+
 .notification {
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.95em;
-    border: 1px solid transparent;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95em;
+  border: 1px solid transparent;
 }
 .notificationSuccess {
-    background-color: #e6f7ec;
-    border-color: #b7e1c8;
-    color: #0f5132;
+  background-color: #e6f7ec;
+  border-color: #b7e1c8;
+  color: #0f5132;
 }
-.notificationError, .error { /* Pega o .error antigo também */
-    background-color: #f8d7da;
-    border-color: #f5c2c7;
-    color: #842029;
-    padding: 15px; /* Adiciona padding ao .error antigo */
-    border-radius: 5px;
+.notificationError {
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+  color: #842029;
 }
 .notificationClose {
-    background: none; border: none; font-size: 1.5rem;
-    line-height: 1; color: inherit; cursor: pointer;
-    opacity: 0.7; padding: 0 5px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 0 5px;
 }
-.notificationClose:hover { opacity: 1; }
+.notificationClose:hover {
+  opacity: 1;
+}
 
-/* ======================================================= */
-/* [V52] ESTILOS PARA O MODAL DE VISUALIZAÇÃO              */
-/* ======================================================= */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -209,18 +279,20 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 15px;
 }
 
 .modalContent {
   background-color: #fff;
   padding: 25px;
   border-radius: 8px;
-  max-width: 600px;
   width: 90%;
+  max-width: 600px;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
 }
 
 .modalHeader {
@@ -229,55 +301,251 @@
   margin-bottom: 20px;
   position: relative;
 }
-.modalHeader h3 { margin-top: 0; color: #333; }
+.modalHeader h3 {
+  margin-top: 0;
+  color: #333;
+}
 
 .modalCloseButton {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 0;
+  right: 0;
   background: none;
   border: none;
   font-size: 1.8rem;
   line-height: 1;
   color: #888;
   cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
 }
-.modalCloseButton:hover { color: #333; }
+.modalCloseButton:hover {
+  color: #333;
+  background-color: #f0f0f0;
+}
 
 .modalBody {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .observationSection {
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 10px;
 }
 .observationSection:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 .observationSection strong {
-    font-size: 0.9em;
-    color: #555;
-    text-transform: uppercase;
+  font-size: 0.9em;
+  color: #555;
+  text-transform: uppercase;
 }
 .observationSection p {
-    margin: 5px 0 0 0;
-    white-space: pre-wrap; /* Preserva quebras de linha */
-    color: #222;
+  margin: 5px 0 0 0;
+  white-space: pre-wrap;
+  color: #222;
 }
 
 .examLink {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 12px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 500;
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
 }
 .examLink:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+}
+
+.profileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+}
+
+.profileFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profileFormGroup label {
+  font-weight: 600;
+  color: var(--preto-zayon);
+  font-size: 0.95rem;
+}
+
+.profileInput {
+  padding: 14px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profileInput:focus {
+  outline: none;
+  border-color: var(--dourado-zayon);
+  box-shadow: 0 0 0 3px rgba(141, 101, 23, 0.15);
+}
+
+.profileInput:disabled {
+  background-color: #e9ecef;
+  color: #666;
+  border-color: #ddd;
+  cursor: not-allowed;
+}
+
+.profileSectionTitle {
+  font-size: 1.3rem;
+  color: var(--dourado-zayon);
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.menuButton:focus-visible,
+.actionButton:focus-visible,
+.modalCloseButton:focus-visible,
+.examLink:focus-visible,
+.secondaryButton:focus-visible,
+.dangerButton:focus-visible,
+.profileInput:focus-visible {
+  outline: 2px solid var(--dourado-zayon);
+  outline-offset: 2px;
+}
+
+/* --- AJUSTES DE ALTO CONTRASTE GERAIS --- */
+
+body.high-contrast .sideMenu {
+  border: 2px solid var(--dourado-zayon);
+  background-color: var(--branco-zayon); /* Preto */
+}
+
+body.high-contrast .contentArea {
+  border: 2px solid var(--dourado-zayon);
+  box-shadow: none;
+  background-color: var(--branco-zayon); /* Preto */
+}
+
+body.high-contrast .menuButton.active {
+  background-color: var(--dourado-zayon);
+  color: var(--preto-zayon); /* Branco na verdade (Preto original) */
+  /* Ajuste fino: Se --preto-zayon virou Branco no HC, e queremos texto preto no fundo amarelo: */
+  color: #000000; 
+}
+
+body.high-contrast .menuButton {
+  color: var(--preto-zayon); /* Branco */
+}
+
+body.high-contrast .profileInput {
+  background-color: var(--branco-zayon); /* Preto */
+  color: var(--preto-zayon); /* Branco */
+  border: 2px solid var(--dourado-zayon);
+}
+
+body.high-contrast .profileInput:focus {
+  border-color: var(--dourado-zayon);
+  box-shadow: 0 0 0 2px var(--dourado-zayon);
+}
+
+body.high-contrast .profileInput:disabled {
+  border-color: #555;
+  color: #aaa;
+}
+
+body.high-contrast .goldenButton {
+  background-image: none;
+  background-color: var(--dourado-zayon);
+  color: #000000;
+  border: 2px solid var(--dourado-zayon);
+  font-weight: bold;
+}
+
+body.high-contrast .secondaryButton {
+  background-color: var(--branco-zayon); /* Preto */
+  color: var(--dourado-zayon);
+  border: 2px solid var(--dourado-zayon);
+}
+
+body.high-contrast .profileFormGroup label {
+  color: var(--preto-zayon); /* Branco */
+}
+
+body.high-contrast .contentTitle {
+  color: var(--dourado-zayon);
+}
+
+@media (max-width: 1024px) {
+  .dashboardContainer {
+    flex-direction: column;
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .sideMenu {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .nav {
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    padding-bottom: 10px;
+  }
+
+  .menuButton {
+    width: auto;
+    flex-shrink: 0;
+    padding: 10px 15px;
+  }
+
+  .contentArea {
+    padding: 20px 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardAgendamento {
+    padding: 15px;
+  }
+
+  .cardActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .actionButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .profileForm {
+    width: 100%;
+  }
 }

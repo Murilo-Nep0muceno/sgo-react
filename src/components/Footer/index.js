@@ -4,32 +4,21 @@ import styles from './Footer.module.css';
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-
-      {/* --- Coluna 1: Mapa (Movido para cima e para fora do 'content') --- */}
-      
-
-      {/* --- Conteúdo (Info + Copyright) agora fica dentro do 'content' --- */}
       <div className={styles.content}>
         
-        {/* --- Bloco de Informações --- */}
-        {/* (Removemos a div .footerMain que não é mais necessária) */}
         <div className={styles.footerInfo}>
           
-          {/* Endereço */}
           <div className={styles.infoBlock}>
             <h3 className={styles.footerTitle}>Localização</h3>
             <p>R. Diogo Cebrian, 47 - Centro, Poá - SP, 08550-160</p>
           </div>
 
-          {/* Contato */}
           <div className={styles.infoBlock}>
             <h3 className={styles.footerTitle}>Contato</h3>
-            {/* Adicionei 'aria-label' para os ícones fazerem sentido */}
             <p aria-label="Email">📧 contato@zayonodonto.com.br</p>
             <p aria-label="WhatsApp">📱 (11) 98765-4321 (WhatsApp)</p>
           </div>
           
-          {/* Dentistas */}
           <div className={styles.infoBlock}>
             <h3 className={styles.footerTitle}>Responsáveis Técnicos</h3>
             <div className={styles.dentistInfo}>
@@ -48,18 +37,18 @@ const Footer = () => {
         </div>
         
         <div className={styles.footerMap}>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.261266635316!2d-46.34778102377464!3d-23.52382106048101!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce7a605f6932c9%3A0xf66a3d9d300baa4b!2sR.%20Diogo%20Cebrian%2C%2047%20-%20Centro%2C%20Po%C3%A1%20-%20SP%2C%2008550-160!5e0!3m2!1spt-BR!2sbr!4v1730294314782!5m2!1spt-BR!2sbr"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Mapa da Localização da Záyon Odontologia"
-        ></iframe>
-      </div>
-        {/* --- Copyright (separado) --- */}
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.261266635316!2d-46.34778102377464!3d-23.52382106048101!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce7a605f6932c9%3A0xf66a3d9d300baa4b!2sR.%20Diogo%20Cebrian%2C%2047%20-%20Centro%2C%20Po%C3%A1%20-%20SP%2C%2008550-160!5e0!3m2!1spt-BR!2sbr!4v1730294314782!5m2!1spt-BR!2sbr"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Mapa da Localização da Záyon Odontologia"
+          ></iframe>
+        </div>
+        
         <div className={styles.copyright}>
           <p>© 2025 Záyon Odontologia. Todos os direitos reservados.</p>
         </div>

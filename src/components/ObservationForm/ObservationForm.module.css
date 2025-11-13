@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 15px;
 }
 
 .modalContent {
@@ -20,14 +21,15 @@
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
 }
 
 .modalHeader {
   border-bottom: 1px solid #eee;
   padding-bottom: 15px;
   margin-bottom: 20px;
-  position: relative; /* Para o botão fechar */
+  position: relative;
 }
 
 .modalHeader h3 {
@@ -35,26 +37,30 @@
   color: #333;
 }
 .modalHeader p {
-    margin: 5px 0;
-    font-size: 0.9em;
-    color: #555;
+  margin: 5px 0;
+  font-size: 0.9em;
+  color: #555;
 }
 
 .modalCloseButton {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 0;
+  right: 0;
   background: none;
   border: none;
   font-size: 1.8rem;
   line-height: 1;
   color: #888;
   cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
 }
 .modalCloseButton:hover {
-    color: #333;
+  color: #333;
+  background-color: #f0f0f0;
 }
-
 
 .form {
   display: flex;
@@ -64,7 +70,7 @@
 
 .form label {
   font-weight: 600;
-  margin-bottom: -10px; /* Aproxima label do input */
+  margin-bottom: -10px;
   color: #444;
 }
 
@@ -74,24 +80,27 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
-  resize: vertical; /* Permite redimensionar verticalmente */
+  resize: vertical;
   min-height: 60px;
+  box-sizing: border-box;
 }
 
 .inputFile {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
 }
 .inputFile:hover {
-    background-color: #f8f8f8;
+  background-color: #f8f8f8;
 }
 
 .fileName {
-    font-size: 0.85em;
-    color: #555;
-    margin-top: -5px;
+  font-size: 0.85em;
+  color: #555;
+  margin-top: -5px;
 }
 
 .modalFooter {
@@ -103,37 +112,87 @@
   margin-top: 20px;
 }
 
-/* Estilos de Botão (copie do seu styles global ou defina aqui) */
 .button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff; /* Azul */
+  background-color: #007bff;
   color: white;
   cursor: pointer;
   font-size: 1rem;
+  margin-top: 0;
 }
 .button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .secondaryButton {
   padding: 10px 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f8f9fa; /* Cinza claro */
+  background-color: #f8f9fa;
   color: #333;
   cursor: pointer;
   font-size: 1rem;
 }
 .secondaryButton:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .error {
-    color: #dc3545; /* Vermelho */
-    font-size: 0.85em;
-    margin-top: -10px;
+  color: #dc3545;
+  font-size: 0.85em;
+  margin-top: -10px;
+}
+
+.modalCloseButton:focus-visible,
+.button:focus-visible,
+.secondaryButton:focus-visible {
+  outline: 2px solid var(--dourado-zayon);
+  outline-offset: 2px;
+}
+
+.textarea:focus,
+.inputFile:focus {
+  border-color: var(--dourado-zayon);
+  box-shadow: 0 0 0 2px rgba(141, 101, 23, 0.2);
+  outline: none;
+}
+
+.textarea:focus-visible,
+.inputFile:focus-visible {
+  outline: 2px solid var(--dourado-zayon);
+  outline-offset: 1px;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .modalContent {
+    padding: 20px 15px;
+    width: 100%;
+  }
+
+  .modalHeader {
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .modalHeader h3 {
+    font-size: 1.2rem;
+  }
+  
+  .modalCloseButton {
+    top: -5px;
+  }
+
+  .modalFooter {
+    flex-direction: column-reverse;
+  }
+  
+  .button, .secondaryButton {
+    width: 100%;
+    margin-top: 0;
+  }
 }

@@ -1,9 +1,39 @@
-/* src/index.css */
+html {
+  font-size: 16px;
+}
+
 :root {
   --branco-zayon: #ffffff;
   --dourado-zayon: #8d6517;
-  --preto-zayon: #1c1c1c; /* Um preto suave é melhor para leitura */
+  --preto-zayon: #1c1c1c;
   --cinza-claro: #f4f4f4;
+  --cinza-medio: #ccc;
+
+  /* Novas variáveis semânticas */
+  --cor-fundo-principal: var(--branco-zayon);
+  --cor-texto-principal: var(--preto-zayon);
+  --cor-fundo-footer: var(--preto-zayon);
+  --cor-texto-footer: var(--branco-zayon);
+}
+
+body.high-contrast {
+  --branco-zayon: #000000;
+  --preto-zayon: #ffffff;
+  --dourado-zayon: #ffff00;
+  --cinza-claro: #1a1a1a;
+  --cinza-medio: #333333;
+
+  /* Regras de Alto Contraste */
+  --cor-fundo-principal: var(--branco-zayon);
+  --cor-texto-principal: var(--preto-zayon);
+  
+  /* ESTA É A CORREÇÃO MÁGICA */
+  --cor-fundo-footer: #333333;
+  --cor-texto-footer: #ffffff;
+
+  background-color: var(--cor-fundo-principal) !important;
+  color: var(--cor-texto-principal) !important;
+  font-weight: bold !important;
 }
 
 body {
@@ -13,21 +43,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--branco-zayon);
-  color: var(--preto-zayon);
+  background-color: var(--cor-fundo-principal);
+  color: var(--cor-texto-principal);
+  font-weight: normal;
 }
 
 * {
   box-sizing: border-box;
-}
-
-/* src/App.css */
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ocupa no mínimo 100% da altura da tela */
-}
-
-main {
-  flex-grow: 1; /* Faz o conteúdo principal crescer e ocupar o espaço disponível */
 }

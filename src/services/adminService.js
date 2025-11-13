@@ -122,3 +122,6 @@ export const updateAppointment = (appointmentId, updatedData, token) => apiReque
 export const cancelAppointmentById = (appointmentId, token) => {
     return apiRequest('PUT', `myAppointment/Cancel/${appointmentId}`, token, {});
 };
+
+export const getClientProfile = (token) => apiRequest('GET', 'client/profile', token);
+export const updateClientProfile = (userData, token) => apiRequest('PUT', 'client/profile', token, userData);
