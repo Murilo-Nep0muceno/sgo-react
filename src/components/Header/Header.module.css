@@ -1,3 +1,4 @@
+/* --- CONFIGURAÇÕES GERAIS DO HEADER --- */
 .header {
   display: flex;
   justify-content: space-between;
@@ -7,13 +8,17 @@
   box-shadow: 0 4px 12px rgba(141, 101, 23, 0.1);
   border-bottom: 1px solid rgba(141, 101, 23, 0.2);
   position: relative;
-  z-index: 999;
+  /* CORREÇÃO 1: Z-index alto para garantir que o header fique acima do overlay */
+  z-index: 1100; 
 }
+
 body.high-contrast .header {
   box-shadow: none;
   border-bottom: 2px solid var(--dourado-zayon);
+  background-color: var(--branco-zayon); /* Preto no HC */
 }
 
+/* --- LOGO --- */
 .logo {
   text-decoration: none;
   color: var(--dourado-zayon);
@@ -28,12 +33,14 @@ body.high-contrast .header {
   opacity: 0.8;
 }
 
+/* --- NAVEGAÇÃO --- */
 .nav {
   display: flex;
   align-items: center;
   gap: 25px;
 }
 
+/* --- LINKS DE NAVEGAÇÃO --- */
 .navLink {
   text-decoration: none;
   color: var(--preto-zayon);
@@ -48,10 +55,12 @@ body.high-contrast .header {
   cursor: pointer;
   font-family: inherit;
 }
+
 body.high-contrast .navLink {
-  color: var(--preto-zayon);
+  color: var(--preto-zayon); /* Branco no HC */
 }
 
+/* Efeito Sublinhado */
 .navLink::after {
   content: '';
   position: absolute;
@@ -63,6 +72,7 @@ body.high-contrast .navLink {
   background-color: var(--dourado-zayon);
   transition: width 0.3s ease-in-out;
 }
+
 body.high-contrast .navLink::after {
   background-color: var(--dourado-zayon);
 }
@@ -71,6 +81,7 @@ body.high-contrast .navLink::after {
   width: 100%;
 }
 
+/* --- BOTÕES DE AÇÃO --- */
 .logoutButton,
 .loginButton {
   background-image: linear-gradient(to right, #a17c34, #8d6517);
@@ -88,12 +99,11 @@ body.high-contrast .navLink::after {
   text-align: center;
 }
 
-/* --- ESTA É A CORREÇÃO DO LOGIN --- */
 body.high-contrast .logoutButton,
 body.high-contrast .loginButton {
   background-image: none !important;
   background-color: var(--dourado-zayon) !important;
-  color: var(--branco-zayon) !important;
+  color: #000000 !important;
   box-shadow: none;
   border: 2px solid var(--dourado-zayon);
 }
@@ -103,11 +113,13 @@ body.high-contrast .loginButton {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(141, 101, 23, 0.4);
 }
+
 body.high-contrast .logoutButton:hover,
 body.high-contrast .loginButton:hover {
   box-shadow: 0 0 10px var(--dourado-zayon);
 }
 
+/* --- BOTÕES MOBILE --- */
 .mobileMenuButton {
   display: none;
   background: none;
@@ -131,6 +143,7 @@ body.high-contrast .loginButton:hover {
   right: 20px;
 }
 
+/* --- OVERLAY (Fundo escuro) --- */
 .overlay {
   display: none;
   position: fixed;
@@ -139,16 +152,19 @@ body.high-contrast .loginButton:hover {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 1000;
+  /* CORREÇÃO 2: Z-index MENOR que o do Header (1100), mas alto o suficiente para cobrir o site */
+  z-index: 1050; 
 }
+
 body.high-contrast .overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .overlay.active {
   display: block;
 }
 
+/* --- ACESSIBILIDADE (FOCUS) --- */
 .logo:focus-visible,
 .navLink:focus-visible,
 .logoutButton:focus-visible,
@@ -159,6 +175,7 @@ body.high-contrast .overlay {
   outline-offset: 2px;
 }
 
+/* --- CONTROLES (Lupas) --- */
 .accessibilityControls {
   display: flex;
   align-items: center;
@@ -166,6 +183,7 @@ body.high-contrast .overlay {
   border-left: 1px solid #eee;
   padding-left: 20px;
 }
+
 body.high-contrast .accessibilityControls {
   border-left: 2px solid var(--preto-zayon);
 }
@@ -173,7 +191,7 @@ body.high-contrast .accessibilityControls {
 .accessibilityButton {
   background: #f0f0f0;
   border: 1px solid #ddd;
-  color:black;
+  color: #1c1c1c;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -185,18 +203,18 @@ body.high-contrast .accessibilityControls {
   transition: background-color 0.2s ease;
 }
 
-/* --- ESTA É A CORREÇÃO DAS LUPAS --- */
 body.high-contrast .accessibilityButton {
-  background: black;
-  border: 2px solid var(--branco-zayon);
-  color: var(--branco-zayon);
+  background: #000000;
+  border: 2px solid #ffffff;
+  color: #ffffff;
 }
 
 .accessibilityButton:hover {
   background: #e0e0e0;
 }
+
 body.high-contrast .accessibilityButton:hover {
-  background: black;
+  background: #333333;
 }
 
 .accessibilityButton:focus-visible {
@@ -204,9 +222,12 @@ body.high-contrast .accessibilityButton:hover {
   outline-offset: 2px;
 }
 
+/* --- RESPONSIVIDADE (MOBILE) --- */
 @media (max-width: 768px) {
   .header {
     padding: 15px 20px;
+    /* No mobile, o z-index do header garante que ele fique sobre o overlay */
+    z-index: 1100; 
   }
 
   .logo {
@@ -216,6 +237,7 @@ body.high-contrast .accessibilityButton:hover {
   .mobileMenuButton {
     display: block;
   }
+  
   body.high-contrast .mobileMenuButton {
     color: var(--preto-zayon);
   }
@@ -232,13 +254,18 @@ body.high-contrast .accessibilityButton:hover {
     gap: 10px;
     padding: 80px 20px 20px 20px;
     box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+    
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
-    z-index: 1001;
+    
+    /* O menu deve ter o maior z-index de todos */
+    z-index: 1200; 
   }
+
   body.high-contrast .nav {
     background-color: var(--branco-zayon);
     box-shadow: -4px 0 15px var(--dourado-zayon);
+    border-left: 2px solid var(--dourado-zayon);
   }
 
   .nav.mobileMenuOpen {
@@ -248,6 +275,7 @@ body.high-contrast .accessibilityButton:hover {
   .mobileCloseButton {
     display: block;
   }
+  
   body.high-contrast .mobileCloseButton {
     color: var(--preto-zayon);
   }
@@ -274,6 +302,7 @@ body.high-contrast .accessibilityButton:hover {
     width: 100%;
     justify-content: space-around;
   }
+  
   body.high-contrast .accessibilityControls {
     border-top: 2px solid var(--preto-zayon);
     border-left: none;
