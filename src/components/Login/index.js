@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useAuth } from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
 import styles from "./Login.module.css";
 
 const Login = () => {
@@ -79,6 +80,12 @@ const Login = () => {
             </div>
           </div>
           
+          <div style={{ textAlign: "right", marginTop: "-10px" }}>
+            <Link to="/forgot-password" style={{ fontSize: "0.9rem", color: "var(--dourado-zayon)", textDecoration: "none", fontWeight: 500 }}>
+                Esqueci minha senha
+            </Link>
+          </div>
+
           {error && <p className={styles.error} role="alert">{error}</p>}
           <button type="submit" className={styles.button}>Entrar</button>
         </form>
