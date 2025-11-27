@@ -142,13 +142,13 @@
   border-radius: 5px;
   cursor: pointer;
   font-weight: 500;
-  color: white;
+  color: black;
   font-size: 0.9rem;
   transition: all 0.2s ease;
 }
 
 .editButton {
-  background-color: #3498db;
+  background-color: #ffc107;
 }
 
 .editButton:hover {
@@ -389,6 +389,87 @@
   cursor: not-allowed;
 }
 
+.chartControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.yearSelector {
+  display: flex;
+  align-items: center;
+}
+
+.chartContainer {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  margin-bottom: 20px;
+  height: 400px;
+  position: relative;
+}
+
+.barChart {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 100%;
+  padding-bottom: 30px;
+  padding-top: 20px;
+}
+
+.barGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.bar {
+  width: 40px;
+  background-color: var(--dourado-zayon);
+  border-radius: 4px 4px 0 0;
+  transition: height 0.5s ease;
+  position: relative;
+  min-height: 1px;
+}
+
+.bar:hover {
+  background-color: #8d6517;
+}
+
+.barValue {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.barLabel {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+}
+
+.statsSummary {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
 .menuButton:focus-visible,
 .actionButton:focus-visible,
 .backButton:focus-visible,
@@ -527,5 +608,13 @@
   .tabsContainer {
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  .bar {
+    width: 20px;
+  }
+  
+  .barLabel {
+    font-size: 0.7rem;
   }
 }

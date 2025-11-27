@@ -1,13 +1,6 @@
-// src/services/adminService.js
-
 const API_URL = "http://localhost:3000/api/v1";
 
-// ===================================================
-// --- Funções Auxiliares Genéricas ---
-// ===================================================
-
 const apiRequest = async (method, endpoint, token, data = null) => {
-    // ... (existing apiRequest function - no changes needed here)
     const headers = {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
@@ -18,7 +11,7 @@ const apiRequest = async (method, endpoint, token, data = null) => {
         headers,
     };
 
-    if (data && method !== 'GET') { // Don't send body for GET
+    if (data && method !== 'GET') { 
         config.body = JSON.stringify(data);
     }
 
@@ -46,27 +39,20 @@ const apiRequest = async (method, endpoint, token, data = null) => {
     }
 };
 
-
 export const createObservation = async (appointmentId, observationData, file, token) => {
     const formData = new FormData();
 
-    // Adiciona os campos de texto do prontuário
-    // O backend (ObservationController) espera os campos soltos no req.body
     if (observationData.diagnostic) formData.append('diagnostic', observationData.diagnostic);
     if (observationData.procedures) formData.append('procedures', observationData.procedures);
     if (observationData.recommendations) formData.append('recommendations', observationData.recommendations);
     
-    // Adiciona o arquivo se existir
     if (file) {
-        // 'image' é o nome que o middleware 'uploadImage.single("image")' espera no backend
         formData.append('image', file); 
     }
 
-    // A rota '/appointmentsObservation/:id' vem do seu 'doctorRouter.js'
     const response = await fetch(`${API_URL}/appointmentsObservation/${appointmentId}`, {
         method: 'POST',
         headers: {
-            // NÃO definimos 'Content-Type', o browser faz isso automaticamente para FormData
             'Authorization': `Bearer ${token}`,
         },
         body: formData,
@@ -79,7 +65,6 @@ export const createObservation = async (appointmentId, observationData, file, to
         } catch (e) {
             errorData = { message: `Erro ${response.status}: ${response.statusText}` };
         }
-        // O backend retorna { "error": "..." }, então usamos errorData.error
         throw new Error(errorData.error || errorData.message || `Falha ao criar observação.`);
     }
 
@@ -91,11 +76,6 @@ export const createObservation = async (appointmentId, observationData, file, to
     }
 };
 
-// ===================================================
-// --- Exports (Funções de Serviço Específicas) ---
-// ===================================================
-
-// Funções de Criação (POST)
 export const createAdmin = (userData, token) => apiRequest("POST", "admin", token, userData);
 export const createSecretary = (userData, token) => apiRequest("POST", "secretary", token, userData);
 export const createDoctor = (userData, token) => apiRequest("POST", "doctor", token, userData);
@@ -103,21 +83,19 @@ export const createClient = (userData, token) => apiRequest("POST", "client", to
 export const createSchedule = (scheduleData, token) => apiRequest("POST", 'schedules', token, scheduleData);
 export const createAppointment = (scheduleId, appointmentData, token) => apiRequest("POST", `appointments/${scheduleId}`, token, appointmentData);
 
-// Funções de Leitura (GET)
 export const getAllUsers = (token) => apiRequest('GET', 'users/getAll', token);
-export const getMySchedules = (token) => apiRequest('GET', 'mySchedules', token); // Doctor
-// ... (outras funções)
-export const getAvailableSchedules = (token) => apiRequest('GET', 'schedules', token); // Secretary
-export const getDoctorAppointments = (token) => apiRequest('GET', 'getMyAppointments', token); // <--- LINHA CORRIGIDA
-export const getAllBookedAppointments = (token) => apiRequest('GET', 'allAppointments', token); // Secretary
-// ...
+export const getMySchedules = (token) => apiRequest('GET', 'mySchedules', token);
+export const getAvailableSchedules = (token) => apiRequest('GET', 'schedules', token);
+export const getDoctorAppointments = (token) => apiRequest('GET', 'getMyAppointments', token);
+export const getAllBookedAppointments = (token) => apiRequest('GET', 'allAppointments', token);
+export const getDashboardStats = (token) => apiRequest('GET', 'admin/stats', token);
 
-export const getClientAppointments = (token) => apiRequest('GET', 'getAllMyAppointmentPatient', token); // Client
+export const getClientAppointments = (token) => apiRequest('GET', 'getAllMyAppointmentPatient', token);
 
-export const deleteUserById = (userId, token) => apiRequest('DELETE', `user/destroy/${userId}`, token); // Admin
+export const deleteUserById = (userId, token) => apiRequest('DELETE', `user/destroy/${userId}`, token);
 
-export const updateUserById = (userId, userData, token) => apiRequest('PUT', `user/update/${userId}`, token, userData); // Admin
-export const updateAppointment = (appointmentId, updatedData, token) => apiRequest('PUT', `appointments/update/${appointmentId}`, token, updatedData); // Secretary
+export const updateUserById = (userId, userData, token) => apiRequest('PUT', `user/update/${userId}`, token, userData);
+export const updateAppointment = (appointmentId, updatedData, token) => apiRequest('PUT', `appointments/update/${appointmentId}`, token, updatedData);
 
 export const cancelAppointmentById = (appointmentId, token) => {
     return apiRequest('PUT', `myAppointment/Cancel/${appointmentId}`, token, {});

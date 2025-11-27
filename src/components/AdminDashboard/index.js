@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { updateUserById, getAllUsers, deleteUserById, createAdmin, createSecretary, createDoctor } from '../../services/adminService';
+import { updateUserById, getAllUsers, deleteUserById, createAdmin, createSecretary, createDoctor, getDashboardStats } from '../../services/adminService';
 import { useAuth } from '../../hooks/useAuth';
 import CreateUserForm from '../CreateUserForm';
 import styles from './AdminDashboard.module.css';
@@ -16,6 +16,124 @@ const PageHeader = ({ title, children }) => (
     <div>{children}</div>
   </div>
 );
+
+const ReportsView = ({ token }) => {
+  const [stats, setStats] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [viewMode, setViewMode] = useState('monthly');
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      setIsLoading(true);
+      try {
+        const data = await getDashboardStats(token);
+        setStats(Array.isArray(data) ? data : []);
+      } catch (err) {
+        setError('Não foi possível carregar os dados do relatório.');
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchStats();
+  }, [token]);
+
+  const chartData = useMemo(() => {
+    if (!stats.length) return [];
+
+    if (viewMode === 'yearly') {
+      const years = {};
+      stats.forEach(app => {
+        if (!app.date) return;
+        const year = app.date.substring(0, 4);
+        years[year] = (years[year] || 0) + 1;
+      });
+      return Object.entries(years)
+        .map(([label, value]) => ({ label, value }))
+        .sort((a, b) => a.label.localeCompare(b.label));
+    } else {
+      const months = Array(12).fill(0);
+      stats.forEach(app => {
+        if (!app.date) return;
+        const [year, month] = app.date.split('-');
+        if (parseInt(year) === selectedYear) {
+          months[parseInt(month) - 1]++;
+        }
+      });
+      const monthNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+      return months.map((value, index) => ({ label: monthNames[index], value }));
+    }
+  }, [stats, viewMode, selectedYear]);
+
+  const maxVal = Math.max(...chartData.map(d => d.value), 1);
+
+  if (isLoading) return <p>Carregando estatísticas...</p>;
+  if (error) return <FeedbackMessage type="error" message={error} />;
+
+  return (
+    <div>
+      <PageHeader title="Relatório de Volume de Agendamentos" />
+      
+      <div className={styles.chartControls}>
+        <div className={styles.tabsContainer}>
+          <button 
+            className={`${viewMode === 'monthly' ? styles.activeTab : ''}`} 
+            onClick={() => setViewMode('monthly')}
+          >
+            Visualização Mensal
+          </button>
+          <button 
+            className={`${viewMode === 'yearly' ? styles.activeTab : ''}`} 
+            onClick={() => setViewMode('yearly')}
+          >
+            Visualização Anual
+          </button>
+        </div>
+
+        {viewMode === 'monthly' && (
+          <div className={styles.yearSelector}>
+            <label htmlFor="year-select">Ano de Referência: </label>
+            <select 
+              id="year-select" 
+              value={selectedYear} 
+              onChange={(e) => setSelectedYear(parseInt(e.target.value))}
+              className={styles.modalInput}
+              style={{width: 'auto', display: 'inline-block', marginLeft: '10px'}}
+            >
+              {Array.from(new Set(stats.map(s => s.date ? parseInt(s.date.substring(0, 4)) : new Date().getFullYear()))).sort().map(y => (
+                <option key={y} value={y}>{y}</option>
+              ))}
+            </select>
+          </div>
+        )}
+      </div>
+
+      <div className={styles.chartContainer}>
+        <div className={styles.barChart}>
+          {chartData.map((item, index) => (
+            <div key={index} className={styles.barGroup}>
+              <div 
+                className={styles.bar} 
+                style={{ height: `${(item.value / maxVal) * 100}%` }}
+                title={`${item.label}: ${item.value} agendamentos`}
+              >
+                {item.value > 0 && <span className={styles.barValue}>{item.value}</span>}
+              </div>
+              <span className={styles.barLabel}>{item.label}</span>
+            </div>
+          ))}
+        </div>
+        {chartData.length === 0 && <p style={{textAlign: 'center', marginTop: '20px'}}>Nenhum dado para exibir.</p>}
+      </div>
+      
+      <div className={styles.statsSummary}>
+        <p>Total de agendamentos no período: <strong>{chartData.reduce((a, b) => a + b.value, 0)}</strong></p>
+      </div>
+    </div>
+  );
+};
 
 const ConfirmationModal = ({ isOpen, title, onClose, onConfirm }) => {
   const [inputValue, setInputValue] = useState('');
@@ -224,7 +342,9 @@ const AdminDashboard = () => {
     }
   }, [token]);
 
-  useEffect(() => { fetchUsers(); }, [fetchUsers]);
+  useEffect(() => { 
+    if (activeView === 'listUsers') fetchUsers(); 
+  }, [fetchUsers, activeView]);
 
   const filteredUsers = useMemo(() => {
     if (!searchTerm) return users;
@@ -317,6 +437,7 @@ const AdminDashboard = () => {
     
     switch (activeView) {
       case 'createUser': return <CreateUserView onUserCreated={handleUserCreated} />;
+      case 'reports': return <ReportsView token={token} />;
       case 'listUsers': default: return (
         <UserManagementView
           users={filteredUsers}
@@ -339,6 +460,7 @@ const AdminDashboard = () => {
         <nav className={styles.nav} aria-label="Menu principal do administrador">
           <button className={`${styles.menuButton} ${activeView === 'listUsers' && !editingUser ? styles.active : ''}`} onClick={() => { setActiveView('listUsers'); setEditingUser(null); setFeedback({type:'', text:''}); }}>Gerenciar Usuários</button>
           <button className={`${styles.menuButton} ${activeView === 'createUser' ? styles.active : ''}`} onClick={() => { setActiveView('createUser'); setEditingUser(null); setFeedback({type:'', text:''}); }}>+ Criar Usuário</button>
+          <button className={`${styles.menuButton} ${activeView === 'reports' ? styles.active : ''}`} onClick={() => { setActiveView('reports'); setEditingUser(null); setFeedback({type:'', text:''}); }}>Relatórios</button>
         </nav>
       </aside>
       <main className={styles.contentArea} aria-labelledby="page-title">
